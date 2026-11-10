@@ -1,53 +1,31 @@
-const timelineData = [
-  { period: "3—4월", title: "질문을 발견하다", body: "학생 질문의 의미를 함께 이해하고, 교과 수업 속 질문의 가능성을 탐색했습니다." },
-  { period: "5—7월", title: "수업을 바꾸다", body: "질문 중심 수업을 시도하고, 학생의 질문이 탐구로 이어지는 과정을 기록했습니다." },
-  { period: "8—10월", title: "모델을 다듬다", body: "수업의 시행착오를 바탕으로 N-ASKIN 질문 탐구 흐름을 구체화했습니다." },
-  { period: "11—12월", title: "배움을 나누다", body: "학생·교사·학교의 변화를 전시하고, 다음 질문을 위한 성찰을 나눕니다." }
-];
+const categories = window.archiveCategories || [];
+const activities = window.archiveActivities || [];
+let activeCategory = categories[0]?.id || "school";
 
-const archiveData = [
-  { number: "COLLECTION 01", title: "질문하는 학생", body: "학생들의 질문과 생각이 탐구로 자라난 순간", symbol: "?" },
-  { number: "COLLECTION 02", title: "질문하는 수업", body: "교과 수업 속에서 질문이 배움으로 이어진 사례", symbol: "Q" },
-  { number: "COLLECTION 03", title: "함께 성장하는 교사", body: "수업을 함께 고민하고 실천하며 나눈 기록", symbol: "+" },
-  { number: "COLLECTION 04", title: "디지털 프로젝트", body: "질문과 기술을 연결해 만든 우리 학교의 프로젝트", symbol: "∞" }
-];
+const overview = document.querySelector("#collection-overview");
+const tabs = document.querySelector("#category-tabs");
+const categoryIntro = document.querySelector("#category-intro");
+const activityGrid = document.querySelector("#activity-grid");
+const dialog = document.querySelector("#activity-dialog");
+const dialogContent = document.querySelector("#dialog-content");
 
-document.querySelector("#timeline").innerHTML = timelineData.map((item) => `
-  <article class="timeline-item reveal">
-    <div class="timeline-card">
-      <time>${item.period}</time>
-      <h3>${item.title}</h3>
-      <p>${item.body}</p>
-    </div>
-  </article>
+const activityCount = (categoryId) => activities.filter((item) => item.category === categoryId).length;
+
+overview.innerHTML = categories.map((category) => `
+  <button class="collection-card ${category.color} reveal" type="button" data-category-link="${category.id}">
+    <span class="collection-number">COLLECTION ${category.number}</span>
+    <span class="collection-symbol" aria-hidden="true">${category.symbol}</span>
+    <strong>${category.title}</strong>
+    <span class="collection-tagline">${category.tagline}</span>
+    <span class="collection-meta">${activityCount(category.id)}개의 활동 <b>→</b></span>
+  </button>
 `).join("");
 
-document.querySelector("#archive-grid").innerHTML = archiveData.map((item) => `
-  <article class="archive-card reveal" data-symbol="${item.symbol}">
-    <span class="card-number">${item.number}</span>
-    <h3>${item.title}</h3>
-    <p>${item.body}</p>
-    <span class="card-link">기록 준비 중 <b>→</b></span>
-  </article>
+tabs.innerHTML = categories.map((category, index) => `
+  <button class="category-tab ${category.color}" type="button" role="tab" data-category="${category.id}" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">
+    <span>${category.number}</span>${category.title}
+  </button>
 `).join("");
-
-const header = document.querySelector(".site-header");
-const menuButton = document.querySelector(".menu-button");
-const nav = document.querySelector(".main-nav");
-
-const updateHeader = () => header.classList.toggle("scrolled", window.scrollY > 30);
-updateHeader();
-window.addEventListener("scroll", updateHeader, { passive: true });
-
-menuButton.addEventListener("click", () => {
-  const isOpen = nav.classList.toggle("open");
-  menuButton.setAttribute("aria-expanded", String(isOpen));
-});
-
-nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
-  nav.classList.remove("open");
-  menuButton.setAttribute("aria-expanded", "false");
-}));
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
@@ -56,6 +34,120 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: .12 });
+}, { threshold: .1 });
 
-document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+const observeReveals = () => {
+  document.querySelectorAll(".reveal:not(.visible)").forEach((element) => observer.observe(element));
+};
+
+function renderCategory(categoryId) {
+  activeCategory = categoryId;
+  const category = categories.find((item) => item.id === categoryId);
+  const items = activities.filter((item) => item.category === categoryId);
+  if (!category) return;
+
+  tabs.querySelectorAll("[role='tab']").forEach((tab) => {
+    const selected = tab.dataset.category === categoryId;
+    tab.setAttribute("aria-selected", String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  });
+
+  categoryIntro.className = `category-intro ${category.color}`;
+  categoryIntro.innerHTML = `
+    <div><span>COLLECTION ${category.number}</span><h3>${category.title}</h3></div>
+    <p>${category.tagline}</p>
+  `;
+
+  activityGrid.className = `activity-grid ${category.color}`;
+  activityGrid.innerHTML = items.map((item, index) => `
+    <article class="activity-card reveal">
+      <div class="activity-card-top"><span>${String(index + 1).padStart(2, "0")}</span><i aria-hidden="true">${category.symbol}</i></div>
+      <h3>${item.title}</h3>
+      <p class="activity-subtitle">${item.subtitle}</p>
+      <p class="activity-preview">${item.introduction}</p>
+      <button type="button" data-open-activity="${item.id}">자세히 보기 <span>→</span></button>
+    </article>
+  `).join("");
+  observeReveals();
+}
+
+function openActivity(activityId) {
+  const activity = activities.find((item) => item.id === activityId);
+  if (!activity) return;
+  const category = categories.find((item) => item.id === activity.category);
+  const imageSection = activity.images?.length ? `<section class="dialog-section"><h3>사진 기록</h3><div class="dialog-gallery">${activity.images.map((image) => `<img src="${image.src}" alt="${image.alt || activity.title}" />`).join("")}</div></section>` : "";
+  const resourceSection = activity.resources?.length ? `<section class="dialog-section"><h3>연결 자료</h3><div class="dialog-resources">${activity.resources.map((resource) => `<a href="${resource.url}" target="_blank" rel="noopener">${resource.label}<span>↗</span></a>`).join("")}</div></section>` : "";
+
+  dialog.className = `activity-dialog ${category?.color || "blue"}`;
+  dialogContent.innerHTML = `
+    <header class="dialog-header">
+      <span class="dialog-category">${category?.title || "활동 기록"}</span>
+      <h2 id="dialog-title">${activity.title}</h2>
+      <p>${activity.subtitle}</p>
+    </header>
+    <section class="dialog-section">
+      <h3>활동 소개</h3>
+      <p class="dialog-introduction">${activity.introduction}</p>
+    </section>
+    <section class="dialog-section">
+      <h3>주요 과정</h3>
+      <ol class="process-list">${activity.process.map((step, index) => `<li><b>${String(index + 1).padStart(2, "0")}</b><span>${step}</span></li>`).join("")}</ol>
+    </section>
+    <section class="outcome-box">
+      <span>${activity.outcomeLabel || "성과 또는 변화"}</span>
+      <p>${activity.outcome}</p>
+    </section>
+    ${imageSection}${resourceSection}
+  `;
+  if (typeof dialog.showModal === "function") dialog.showModal();
+}
+
+document.addEventListener("click", (event) => {
+  const categoryLink = event.target.closest("[data-category-link]");
+  if (categoryLink) {
+    renderCategory(categoryLink.dataset.categoryLink);
+    document.querySelector("#archive").scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+  const tab = event.target.closest("[data-category]");
+  if (tab) {
+    renderCategory(tab.dataset.category);
+    return;
+  }
+  const activityButton = event.target.closest("[data-open-activity]");
+  if (activityButton) openActivity(activityButton.dataset.openActivity);
+});
+
+tabs.addEventListener("keydown", (event) => {
+  if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+  const currentIndex = categories.findIndex((item) => item.id === activeCategory);
+  const direction = event.key === "ArrowRight" ? 1 : -1;
+  const nextIndex = (currentIndex + direction + categories.length) % categories.length;
+  const nextId = categories[nextIndex].id;
+  renderCategory(nextId);
+  tabs.querySelector(`[data-category="${nextId}"]`).focus();
+});
+
+document.querySelector(".dialog-close").addEventListener("click", () => dialog.close());
+dialog.addEventListener("click", (event) => {
+  if (event.target === dialog) dialog.close();
+});
+
+const header = document.querySelector(".site-header");
+const menuButton = document.querySelector(".menu-button");
+const nav = document.querySelector(".main-nav");
+const updateHeader = () => header.classList.toggle("scrolled", window.scrollY > 30);
+updateHeader();
+window.addEventListener("scroll", updateHeader, { passive: true });
+
+menuButton.addEventListener("click", () => {
+  const isOpen = nav.classList.toggle("open");
+  menuButton.setAttribute("aria-expanded", String(isOpen));
+});
+nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+  nav.classList.remove("open");
+  menuButton.setAttribute("aria-expanded", "false");
+}));
+
+renderCategory(activeCategory);
+observeReveals();
