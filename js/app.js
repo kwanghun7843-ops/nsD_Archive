@@ -83,11 +83,36 @@ function renderCategory(categoryId) {
   observeReveals();
 }
 
+// 남산 울림(M&Q): 월별 질문·답변 기록 카드
+function renderMQMonth(month) {
+  if (!month) return "";
+  return `
+    <div class="mq-month-summary">
+      <strong>${month.month}의 울림</strong>
+      <span>${month.caption}</span>
+    </div>
+    <div class="mq-month-posters">
+      <figure class="mq-poster-question">
+        <a href="${month.question}" target="_blank" rel="noopener" aria-label="${month.month} 베스트 질문 포스터 크게 보기">
+          <img src="${month.question}" alt="${month.month} 남산 울림 베스트 질문 3개 선정 결과" loading="lazy" />
+        </a>
+        <figcaption><b>BEST QUESTION</b> 이달의 베스트 질문 3개 <span>클릭해서 크게 보기 ↗</span></figcaption>
+      </figure>
+      <figure class="mq-poster-answer">
+        <a href="${month.answer}" target="_blank" rel="noopener" aria-label="${month.month} 베스트 답변 포스터 크게 보기">
+          <img src="${month.answer}" alt="${month.month} 남산 울림 베스트 답변 3개 선정 결과" loading="lazy" />
+        </a>
+        <figcaption><b>BEST ANSWER</b> 이달의 베스트 답변 3개 <span>클릭해서 크게 보기 ↗</span></figcaption>
+      </figure>
+    </div>
+  `;
+}
+
 function openActivity(activityId) {
   const activity = activities.find((item) => item.id === activityId);
   if (!activity) return;
   const category = categories.find((item) => item.id === activity.category);
-  const imageSection = activity.images?.length ? `<section class="dialog-section"><h3>사진 기록</h3><div class="dialog-gallery">${activity.images.map((image) => `<figure><img src="${image.src}" alt="${image.alt || activity.title}" loading="lazy" />${image.caption ? `<figcaption>${image.caption}</figcaption>` : ""}</figure>`).join("")}</div></section>` : "";
+  const imageSection = activity.images?.length ? `<section class="dialog-section ${activity.mq ? "mq-photo-section" : ""}"><h3>${activity.mq ? "방송실 앞, 울림의 현장" : "사진 기록"}</h3><div class="dialog-gallery">${activity.images.map((image) => `<figure>${activity.mq ? `<a href="${image.src}" target="_blank" rel="noopener" aria-label="${image.alt || activity.title} 사진 크게 보기">` : ""}<img src="${image.src}" alt="${image.alt || activity.title}" loading="lazy" />${activity.mq ? "</a>" : ""}${image.caption ? `<figcaption>${image.caption}</figcaption>` : ""}</figure>`).join("")}</div></section>` : "";
   const resourceSection = activity.resources?.length ? `<section class="dialog-section"><h3>연결 자료</h3><div class="dialog-resources">${activity.resources.map((resource) => `<a href="${resource.url}" target="_blank" rel="noopener">${resource.label}<span>↗</span></a>`).join("")}</div></section>` : "";
   const highlightSection = activity.highlights?.length ? `
     <section class="dialog-section activity-highlight-section">
@@ -119,6 +144,47 @@ function openActivity(activityId) {
     </section>
   ` : "";
 
+  const mqSection = activity.mq ? `
+    <section class="dialog-section mq-guide-section">
+      <div class="mq-section-kicker">MUSIC & QUESTION</div>
+      <h3>어떻게 질문할까요?</h3>
+      <p class="mq-guide-intro">${activity.mq.guideIntro}</p>
+      <div class="mq-writing-checklist">
+        <h4>좋은 질문을 위한 3대 체크리스트</h4>
+        <div>${activity.mq.checklist.map((point) => `<article><b>${point.title}</b><span>${point.body}</span></article>`).join("")}</div>
+      </div>
+      <div class="mq-route-grid">
+        ${activity.mq.routes.map((route) => `<article><strong>${route.title}</strong><p>${route.body}</p></article>`).join("")}
+      </div>
+      <div class="mq-guide-grid">
+        ${activity.mq.guides.map((guide) => `<figure>
+          <a href="${guide.src}" target="_blank" rel="noopener" aria-label="${guide.title} 크게 보기"><img src="${guide.src}" alt="${guide.alt}" loading="lazy" /></a>
+          <figcaption><b>${guide.title}</b><span>${guide.caption}</span></figcaption>
+        </figure>`).join("")}
+      </div>
+    </section>
+    <section class="dialog-section mq-criteria-section">
+      <h3>무엇을 기준으로 선정할까요?</h3>
+      <div class="mq-criteria-grid">
+        ${activity.mq.criteria.map((criteria) => `<article>
+          <h4>${criteria.title}</h4>
+          <ul>${criteria.items.map((item) => `<li><b>${item.name}</b><span>${item.detail}</span></li>`).join("")}</ul>
+        </article>`).join("")}
+      </div>
+    </section>
+  ` : "";
+  const mqArchiveSection = activity.mq?.months?.length ? `
+    <section class="dialog-section mq-month-section">
+      <div class="mq-section-kicker">MONTHLY ARCHIVE · 2026</div>
+      <h3>이달의 베스트 질문 & 답변</h3>
+      <p class="mq-guide-intro">${activity.mq.monthlyIntro}</p>
+      <div class="mq-month-tabs" role="tablist" aria-label="월별 베스트 질문과 답변">
+        ${activity.mq.months.map((month, index) => `<button type="button" role="tab" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}" data-mq-month="${index}">${month.month.replace("2026년 ", "")}</button>`).join("")}
+      </div>
+      <div class="mq-month-panel" role="tabpanel" aria-live="polite">${renderMQMonth(activity.mq.months[0])}</div>
+    </section>
+  ` : "";
+
   dialog.className = `activity-dialog ${category?.color || "blue"}`;
   dialogContent.innerHTML = `
     <header class="dialog-header">
@@ -136,11 +202,12 @@ function openActivity(activityId) {
     </section>
     ${highlightSection}
     ${programSection}
+    ${mqSection}
     <section class="outcome-box">
       <span>${activity.outcomeLabel || "성과 또는 변화"}</span>
       <p>${activity.outcome}</p>
     </section>
-    ${imageSection}${resourceSection}
+    ${imageSection}${mqArchiveSection}${resourceSection}
   `;
   if (typeof dialog.showModal === "function") dialog.showModal();
 }
@@ -185,6 +252,22 @@ function openNaskinModel(modelId) {
 }
 
 document.addEventListener("click", (event) => {
+  const mqMonthTab = event.target.closest("[data-mq-month]");
+  if (mqMonthTab) {
+    const monthSection = mqMonthTab.closest(".mq-month-section");
+    const monthIndex = Number(mqMonthTab.dataset.mqMonth);
+    const mqActivity = activities.find((item) => item.id === "mq-project");
+    const selectedMonth = mqActivity?.mq?.months?.[monthIndex];
+    if (monthSection && selectedMonth) {
+      monthSection.querySelectorAll("[data-mq-month]").forEach((tab) => {
+        const selected = tab === mqMonthTab;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+      });
+      monthSection.querySelector(".mq-month-panel").innerHTML = renderMQMonth(selectedMonth);
+    }
+    return;
+  }
   const categoryLink = event.target.closest("[data-category-link]");
   if (categoryLink) {
     renderCategory(categoryLink.dataset.categoryLink);

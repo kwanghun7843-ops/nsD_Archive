@@ -733,3 +733,62 @@ footer { color: #78a5c8; background: #06376c; }
   .model-scope-note { display: grid; }
   .model-subjects { margin: 26px 25px 40px; }
 }
+
+
+/* M&Q 프로젝트 – 질문카드, 선정 기준, 월별 기록 */
+.mq-section-kicker { margin-bottom: 10px; color: #cd4e89; font-size: 10px; font-weight: 900; letter-spacing: .14em; }
+.mq-guide-intro { margin: 0 0 20px; color: #526d84; font-size: 13px; line-height: 1.85; }
+.mq-route-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin: 20px 0 25px; }
+.mq-route-grid article { padding: 17px 15px; border: 1px solid #e5dcf5; border-radius: 17px; background: #faf7ff; }
+.mq-route-grid strong { display: block; color: #6841a2; font-size: 12px; line-height: 1.55; }
+.mq-route-grid p { margin: 7px 0 0; color: #5e6381; font-size: 11px; line-height: 1.8; }
+.mq-guide-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 14px; }
+.mq-guide-grid figure { overflow: hidden; margin: 0; border: 1px solid #e5dff5; border-radius: 16px; background: #fafaff; }
+.mq-guide-grid a { display: flex; align-items: center; justify-content: center; min-height: 230px; padding: 8px; }
+.mq-guide-grid img { display: block; width: 100%; max-height: 420px; object-fit: contain; }
+.mq-guide-grid figcaption { display: grid; gap: 6px; padding: 13px 15px 16px; border-top: 1px solid #ece5f9; }
+.mq-guide-grid figcaption b { color: #5c3989; font-size: 12px; }
+.mq-guide-grid figcaption span { color: #65758a; font-size: 11px; line-height: 1.65; }
+.mq-criteria-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.mq-criteria-grid article { padding: 20px 22px; border: 1px solid #e9e1f3; border-radius: 18px; background: #fcf9ff; }
+.mq-criteria-grid article:nth-child(2) { border-color: #f2dde8; background: #fff8fb; }
+.mq-criteria-grid h4 { margin: 0 0 12px; color: #6245a9; font-size: 15px; }
+.mq-criteria-grid article:nth-child(2) h4 { color: #c24687; }
+.mq-criteria-grid ul { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
+.mq-criteria-grid li { display: grid; gap: 3px; }
+.mq-criteria-grid li b { color: #354f80; font-size: 12px; }
+.mq-criteria-grid li span { color: #69758c; font-size: 11px; line-height: 1.6; }
+.mq-photo-section .dialog-gallery img { aspect-ratio: 3/4; object-fit: contain; background: #f4f5fa; }
+.mq-photo-section .dialog-gallery a { display: block; }
+.mq-month-section { padding-bottom: 55px; }
+.mq-month-tabs { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 7px; margin: 19px 0 20px; }
+.mq-month-tabs button { min-height: 44px; padding: 10px 5px; color: #694d8c; border: 1px solid #e2d5ee; border-radius: 12px; background: #f9f5ff; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
+.mq-month-tabs button[aria-selected="true"] { color: white; border-color: #6641bd; background: #6641bd; box-shadow: 0 5px 13px rgba(102,65,189,.18); }
+.mq-month-tabs button:focus-visible, .mq-guide-grid a:focus-visible, .mq-month-posters a:focus-visible { outline: 3px solid #f1a1d2; outline-offset: 3px; }
+.mq-month-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 7px 15px; margin-bottom: 14px; }
+.mq-month-summary strong { color: #5c3ca7; font-size: 17px; }
+.mq-month-summary span { color: #7a8093; font-size: 11px; line-height: 1.6; }
+.mq-month-posters { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: start; gap: 13px; }
+.mq-month-posters figure { overflow: hidden; margin: 0; border: 1px solid #e3ddec; border-radius: 15px; background: #fbfaff; }
+.mq-month-posters a { display: block; }
+.mq-month-posters img { display: block; width: 100%; height: auto; }
+.mq-month-posters figcaption { display: flex; flex-direction: column; gap: 5px; padding: 12px 13px; color: #52657f; font-size: 11px; font-weight: 600; line-height: 1.55; }
+.mq-month-posters figcaption b { color: #d14982; font-size: 11px; letter-spacing: .05em; }
+.mq-poster-answer figcaption b { color: #584fc3; }
+.mq-month-posters figcaption span { color: #88829c; font-size: 10px; }
+@media (max-width: 720px) {
+  .mq-route-grid { grid-template-columns: 1fr; }
+  .mq-guide-grid, .mq-criteria-grid { grid-template-columns: 1fr; }
+  .mq-guide-grid a { min-height: 0; }
+  .mq-month-tabs { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .mq-month-posters { grid-template-columns: 1fr; }
+}
+@media (max-width: 420px) { .mq-photo-section .dialog-gallery { grid-template-columns: 1fr; } }
+
+.mq-writing-checklist { margin: 20px 0 25px; padding: 20px; border-radius: 18px; background: #f3f3ff; }
+.mq-writing-checklist h4 { margin: 0 0 15px; color: #59429e; font-size: 14px; }
+.mq-writing-checklist > div { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
+.mq-writing-checklist article { display: grid; gap: 7px; padding: 14px; border-radius: 13px; background: #fff; }
+.mq-writing-checklist b { color: #6953bb; font-size: 12px; }
+.mq-writing-checklist span { color: #65708c; font-size: 11px; line-height: 1.6; }
+@media (max-width: 720px) { .mq-writing-checklist > div { grid-template-columns: 1fr; } }
