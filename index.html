@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">본문으로 바로가기</a>
@@ -96,16 +96,35 @@
     </section>
 
     <section id="naskin" class="naskin-section">
-      <div class="section-shell naskin-layout">
-        <div class="naskin-copy reveal">
-          <p class="section-kicker light">OUR LEARNING MODEL</p>
-          <h2>질문을 배움으로 잇는<br /><em>N-ASKIN</em></h2>
-          <p>관찰에서 시작한 질문을 탐색하고 연결하며 실행한 뒤, 성찰을 통해 다음 질문으로 확장하는 남산중학교의 6단계 질문탐구 수업모델입니다.</p>
-          <button class="text-link" type="button" data-open-activity="naskin-model">수업모델 자세히 보기 <span>→</span></button>
+      <div class="section-shell">
+        <div class="naskin-layout">
+          <div class="naskin-copy reveal">
+            <p class="section-kicker light">OUR LEARNING MODEL</p>
+            <h2>질문을 배움으로 잇는<br /><em>N-ASKIN</em></h2>
+            <p>N-ASKIN은 학생이 현상과 자료를 관찰하여 자신의 질문을 만들고, 다양한 탐구를 통해 답과 근거를 찾아가는 6단계 질문탐구 수업모델입니다. 탐구 결과를 설명하거나 직접 구현한 뒤, 재검증과 성찰을 통해 새로운 질문으로 배움을 확장합니다.</p>
+            <p class="naskin-definition">특정 교과에 고정된 수업모형이 아니라, 교과와 탐구 목적에 따라 유연하게 적용할 수 있는 <strong>공통 탐구 흐름</strong>입니다.</p>
+          </div>
+          <ol class="naskin-steps reveal" aria-label="N-ASKIN 6단계">
+            <li><b>N</b><div><strong>Notice</strong><span>현상·자료에서 궁금증과 문제 발견</span></div></li>
+            <li><b>A</b><div><strong>Ask</strong><span>확인 가능한 탐구 질문으로 정교화</span></div></li>
+            <li><b>S</b><div><strong>Search</strong><span>조사·관찰·실험·테스트로 근거 수집</span></div></li>
+            <li><b>K</b><div><strong>Knit</strong><span>근거와 교과 개념을 연결해 설명</span></div></li>
+            <li><b>I</b><div><strong>Implement</strong><span>답·판단·수정·해결책으로 표현</span></div></li>
+            <li><b>N</b><div><strong>Next</strong><span>재검증하고 한계·개선점·후속 질문 발견</span></div></li>
+          </ol>
         </div>
-        <ol class="naskin-steps reveal" aria-label="N-ASKIN 6단계">
-          <li><b>N</b><div><strong>Notice</strong><span>관찰하고 발견하기</span></div></li><li><b>A</b><div><strong>Ask</strong><span>탐구 질문 만들기</span></div></li><li><b>S</b><div><strong>Search</strong><span>근거를 찾아 탐색하기</span></div></li><li><b>K</b><div><strong>Knit</strong><span>생각과 근거 연결하기</span></div></li><li><b>I</b><div><strong>Implement</strong><span>적용하고 실행하기</span></div></li><li><b>N</b><div><strong>Next</strong><span>성찰하고 확장하기</span></div></li>
-        </ol>
+
+        <div class="naskin-bridge reveal">
+          <p class="section-kicker light">ONE FLOW, FOUR APPLICATIONS</p>
+          <h3>하나의 탐구 흐름, 네 가지 적용 모델</h3>
+          <p>모든 수업에서 같은 활동을 반복하지 않습니다. 질문의 목적에 따라 탐구 대상, 수집해야 할 근거, 결과물과 검증 방법이 달라집니다.</p>
+          <div class="model-scope-note">
+            <span><b>범교과 적용 모델</b> 범용형 · 분석·판단형 · 프로젝트형</span>
+            <span><b>정보교과 특화 모델</b> 디버깅형</span>
+          </div>
+        </div>
+
+        <div id="naskin-model-grid" class="naskin-model-grid" aria-label="N-ASKIN 네 가지 적용 모델"></div>
       </div>
     </section>
 
@@ -121,7 +140,12 @@
     <div id="dialog-content"></div>
   </dialog>
 
-  <script src="archive-data.js"></script>
-  <script src="script.js"></script>
+  <script src="data/categories.js"></script>
+  <script src="data/school.js"></script>
+  <script src="data/student.js"></script>
+  <script src="data/lesson.js"></script>
+  <script src="data/teacher.js"></script>
+  <script src="data/naskin.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

@@ -5,10 +5,15 @@ GitHub Pages에서 별도의 설치나 빌드 없이 실행할 수 있는 정적
 ## 파일 구성
 
 - `index.html` — 웹앱 화면 구조
-- `styles.css` — 리플릿 테마와 반응형 디자인
-- `script.js` — 카테고리 전환과 활동 상세 창 기능
-- `archive-data.js` — 4개 카테고리와 17개 활동 내용
-- `assets/images/` — 추후 활동 사진 저장 폴더
+- `css/styles.css` — 리플릿 테마와 반응형 디자인
+- `js/app.js` — 카테고리 전환과 활동 상세 창 기능
+- `data/categories.js` — 4개 영역의 이름·설명·색상
+- `data/school.js` — 질문하는 학교 활동
+- `data/student.js` — 질문하는 학생 활동
+- `data/lesson.js` — 질문하는 수업 활동
+- `data/teacher.js` — 함께 성장하는 교사 활동
+- `data/naskin.js` — N-ASKIN 4개 적용 모델과 수업 적용 예시
+- `assets/images/` — 영역별 활동 사진 저장 폴더
 
 ## GitHub Pages에 올리는 방법
 
@@ -21,7 +26,14 @@ GitHub Pages에서 별도의 설치나 빌드 없이 실행할 수 있는 정적
 
 ## 활동 문구 수정
 
-활동명, 소개, 주요 과정, 성과 문구는 `archive-data.js`에서 수정합니다.
+활동명, 소개, 주요 과정, 성과 문구는 해당 영역의 데이터 파일에서 수정합니다.
+
+| 수정할 영역 | 파일 |
+| --- | --- |
+| 질문하는 학교 | `data/school.js` |
+| 질문하는 학생 | `data/student.js` |
+| 질문하는 수업 | `data/lesson.js` |
+| 함께 성장하는 교사 | `data/teacher.js` |
 
 ```javascript
 {
@@ -37,14 +49,27 @@ GitHub Pages에서 별도의 설치나 빌드 없이 실행할 수 있는 정적
 }
 ```
 
+## N-ASKIN 적용 모델 수정
+
+N-ASKIN 영역은 `기본 개념 → 공통 6단계 → 4개 적용 모델 → 수업 적용 예시` 순서로 구성되어 있습니다. 각 모델의 목적, 핵심 질문, 단계별 활동과 적용 예시는 `data/naskin.js`에서 수정합니다.
+
+- 범교과 적용 모델: 범용형·분석판단형·프로젝트형
+- 정보교과 특화 모델: 디버깅형
+
 ## 사진 추가
 
-사진 파일을 `assets/images` 폴더에 넣은 다음 해당 활동의 `images` 배열에 등록합니다.
+사진 파일을 해당 영역의 이미지 폴더에 넣은 다음 활동 데이터의 `images` 배열에 등록합니다.
+
+- `assets/images/school/`
+- `assets/images/student/`
+- `assets/images/lesson/`
+- `assets/images/teacher/`
+- `assets/images/naskin/`
 
 ```javascript
 images: [
-  { src: "assets/images/question-wings-main.jpg", alt: "완성된 질문의 날개" },
-  { src: "assets/images/question-wings-activity-01.jpg", alt: "학생 질문 작성 모습" }
+  { src: "assets/images/school/question-wings-main.jpg", alt: "완성된 질문의 날개" },
+  { src: "assets/images/school/question-wings-activity-01.jpg", alt: "학생 질문 작성 모습" }
 ]
 ```
 
