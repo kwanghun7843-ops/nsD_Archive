@@ -239,29 +239,237 @@ window.archiveActivities.push(...[
     "id": "inquiry-contest",
     "category": "student",
     "title": "인문·수리·과학 질문탐구대회",
-    "subtitle": "호기심을 깊이 있는 탐구로, 근거를 통해 답을 찾다!",
-    "introduction": "인문·수리·과학 분야에서 학생들이 스스로 탐구 질문을 만들고 답과 근거를 찾아가는 활동입니다. 독서와 자료 조사, 논리적 추론, 과학적 탐구를 통해 호기심에서 출발한 질문을 깊이 있는 배움으로 발전시켰습니다.",
+    "subtitle": "질문에서 시작해, 탐구의 과정과 근거를 작품으로 남기다!",
+    "introduction": "인문학은 독서와 필사에서 생긴 질문을 글과 그림으로 확장하고, 수학은 교구를 탐색하며 전략과 규칙에 관한 질문을 리포트로 정리했습니다. 과학은 자연과 일상에서 만나는 현상에 대한 질문을 바탕으로 탐구하는 영역입니다. 세 영역 모두 스스로 질문하고 자신의 생각을 근거와 함께 표현하는 배움을 지향합니다.",
     "process": [
-      "인문: 책 속에 숨은 생각의 보물을 찾는 질문 탐구",
-      "수리: 숫자와 도형에 숨겨진 원리를 발견하는 질문 탐구",
-      "과학: 자연과 일상 속 현상을 관찰하고 과학적 원리를 찾는 질문 탐구"
+      "인문학 — 아침독서·필사에서 질문을 발견하고 자신의 답과 시각화 작품으로 표현",
+      "수학 — 우봉고·세트·루빅스 레이스를 탐색하며 전략·규칙·조합의 수학을 질문과 기록으로 정리",
+      "과학 — 자연·일상 현상에 대한 질문을 관찰과 자료, 과학적 설명으로 탐구"
     ],
-    "outcome": "학생들은 자신의 호기심을 확인 가능한 탐구 문제로 발전시키고, 다양한 자료와 근거를 바탕으로 탐구 결과를 설명하는 역량을 길렀습니다.",
+    "outcomeLabel": "탐구의 기록",
+    "outcome": "인문학 분야의 학생 질문·답변과 시각화 작품, 수학 분야의 활동 사진과 14쪽 분량의 우수 리포트를 기록했습니다. 과학 분야는 활동의 취지와 탐구 흐름을 문구로 소개합니다.",
     "images": [],
-    "resources": []
+    "resources": [],
+    "inquiry": {
+      "intro": "학생의 질문이 어떤 과정으로 자라고, 어떻게 근거와 결과물로 남았는지 세 분야의 기록을 살펴보세요.",
+      "tracks": [
+        {
+          "id": "humanities",
+          "label": "인문학",
+          "eyebrow": "READ · QUESTION · EXPRESS",
+          "title": "책과 한 문장에서 피어난 나만의 질문",
+          "lead": "‘나의 아침독서, 질문으로 깊어지다’에서는 책 제목·목차에서 첫 질문을 만들고, 기억에 남는 문장에서 등장인물이나 작가에게 던질 질문을 찾습니다. 이어 책 내용을 근거로 나의 답을 쓰고, 읽으며 떠오른 생각을 그림으로 시각화합니다. ‘단 한 줄의 필사, 질문으로 피어나다’에서는 마음에 남은 시 한 줄을 필사한 뒤 질문·이유·그림·답을 연결합니다.",
+          "focus": [
+            {
+              "title": "아침독서 질문탐구",
+              "body": "책을 펼치기 전의 질문 → 기억에 남은 문장과 후속 질문 → 책 속 근거로 쓴 나의 답 → 시각적 이미지 ‘생각의 지도’"
+            },
+            {
+              "title": "한 줄 필사 질문탐구",
+              "body": "깊이 와닿은 시구 필사 → 작가·화자에게 던질 질문과 이유 → 떠오른 장면의 시각화 → 그 문장이 나에게 주는 의미"
+            }
+          ],
+          "galleryTitle": "대회 현장과 학생 탐구 작품",
+          "galleryIntro": "대회 모습, 입상 작품, 질문 기록과 생각의 지도까지 실제 자료를 모았습니다. 작품을 선택하면 큰 이미지로 살펴볼 수 있습니다.",
+          "gallery": [
+            {
+              "src": "assets/images/student/inquiry-humanities-award.webp",
+              "alt": "인문학 질문탐구대회 입상 학생들의 작품 공유 모습",
+              "caption": "인문학 질문탐구대회 입상 학생들의 작품 공유 모습",
+              "kind": "photo"
+            },
+            {
+              "src": "assets/images/student/inquiry-humanities-class.webp",
+              "alt": "책을 읽고 질문과 답을 기록하는 인문학 질문탐구대회 활동 현장",
+              "caption": "책을 읽고 질문과 답을 기록하는 인문학 질문탐구대회 활동 현장",
+              "kind": "photo"
+            },
+            {
+              "src": "assets/images/student/inquiry-humanities-reading-01.webp",
+              "alt": "아침독서에서 출발한 첫 질문과 독서기록 기반 질문·답변",
+              "caption": "아침독서에서 출발한 첫 질문과 독서기록 기반 질문·답변",
+              "kind": "work"
+            },
+            {
+              "src": "assets/images/student/inquiry-humanities-reading-02.webp",
+              "alt": "책을 읽으며 떠오른 생각을 이미지로 표현한 생각의 지도",
+              "caption": "책을 읽으며 떠오른 생각을 이미지로 표현한 생각의 지도",
+              "kind": "work"
+            },
+            {
+              "src": "assets/images/student/inquiry-humanities-reading-03.webp",
+              "alt": "도서 내용에서 질문을 만들고 자신의 대답과 이유를 작성한 작품",
+              "caption": "도서 내용에서 질문을 만들고 자신의 대답과 이유를 작성한 작품",
+              "kind": "work"
+            },
+            {
+              "src": "assets/images/student/inquiry-humanities-reading-04.webp",
+              "alt": "읽은 내용을 자신의 시각으로 재구성한 인문학 시각화 작품",
+              "caption": "읽은 내용을 자신의 시각으로 재구성한 인문학 시각화 작품",
+              "kind": "work"
+            },
+            {
+              "src": "assets/images/student/inquiry-humanities-poetry-01.webp",
+              "alt": "필사한 시 구절을 읽고 질문·이유·그림·답변으로 확장한 작품",
+              "caption": "필사한 시 구절을 읽고 질문·이유·그림·답변으로 확장한 작품",
+              "kind": "work"
+            },
+            {
+              "src": "assets/images/student/inquiry-humanities-poetry-02.webp",
+              "alt": "한 문장의 필사에서 시작한 질문을 시각적 표현으로 확장한 결과물",
+              "caption": "한 문장의 필사에서 시작한 질문을 시각적 표현으로 확장한 결과물",
+              "kind": "work"
+            }
+          ]
+        },
+        {
+          "id": "math",
+          "label": "수학",
+          "eyebrow": "PLAY · STRATEGY · EVIDENCE",
+          "title": "수학 교구에서 발견한 규칙과 전략의 질문",
+          "lead": "우봉고, 세트, 루빅스 레이스를 직접 다루며 풀이의 속도와 정확성을 높이는 전략을 시도하고, 그 방법이 통하는 이유를 질문으로 정리했습니다. 우수작 리포트에는 세 게임을 비교한 관찰, 자신이 사용한 전략과 개선 방향이 남아 있습니다.",
+          "focus": [
+            {
+              "title": "우봉고(Ubongo)",
+              "body": "공간지각과 도형의 분할 — 조각을 맞추는 순서와 회전·뒤집기, 도형의 크기에 따라 해결 전략이 달라지는지 탐색"
+            },
+            {
+              "title": "세트(SET)",
+              "body": "속성과 조합의 수학 — 색·모양·개수·채움 등 여러 속성을 비교해 성립하는 조합을 찾는 규칙과 전략 탐색"
+            },
+            {
+              "title": "루빅스 레이스(Rubik’s Race)",
+              "body": "패턴 매칭과 슬라이딩 퍼즐 — 제한된 공간에서 블록을 이동해 목표 패턴에 도달하는 순서와 전략 탐색"
+            }
+          ],
+          "galleryTitle": "수학 교구를 활용한 질문탐구 활동",
+          "galleryIntro": "학생들이 교구를 직접 조작하며 전략을 시험해 보는 장면입니다.",
+          "gallery": [
+            {
+              "src": "assets/images/student/inquiry-math-activity-01.webp",
+              "alt": "교구의 모양과 조합을 관찰하며 해결 전략을 탐색하는 모습",
+              "caption": "교구의 모양과 조합을 관찰하며 해결 전략을 탐색하는 모습",
+              "kind": "photo"
+            },
+            {
+              "src": "assets/images/student/inquiry-math-activity-02.webp",
+              "alt": "수학 교구를 조작하고 서로 다른 전략을 시도하는 학생들",
+              "caption": "수학 교구를 조작하고 서로 다른 전략을 시도하는 학생들",
+              "kind": "photo"
+            },
+            {
+              "src": "assets/images/student/inquiry-math-activity-03.webp",
+              "alt": "도형과 색상 조합을 비교하며 문제를 해결하는 활동",
+              "caption": "도형과 색상 조합을 비교하며 문제를 해결하는 활동",
+              "kind": "photo"
+            },
+            {
+              "src": "assets/images/student/inquiry-math-activity-04.webp",
+              "alt": "규칙과 해결 순서를 스스로 점검하는 질문탐구 장면",
+              "caption": "규칙과 해결 순서를 스스로 점검하는 질문탐구 장면",
+              "kind": "photo"
+            }
+          ],
+          "reportIntro": "첨부된 우수 리포트 14쪽을 학생별 두 쪽씩 묶었습니다. 학번·이름은 공개용 이미지에서 가렸으며, 각 페이지를 클릭하면 확대해 볼 수 있습니다.",
+          "reports": [
+            {
+              "title": "우수 리포트 1",
+              "pages": [
+                "assets/images/student/inquiry-math-report-01.webp",
+                "assets/images/student/inquiry-math-report-02.webp"
+              ],
+              "pageRange": "1–2쪽"
+            },
+            {
+              "title": "우수 리포트 2",
+              "pages": [
+                "assets/images/student/inquiry-math-report-03.webp",
+                "assets/images/student/inquiry-math-report-04.webp"
+              ],
+              "pageRange": "3–4쪽"
+            },
+            {
+              "title": "우수 리포트 3",
+              "pages": [
+                "assets/images/student/inquiry-math-report-05.webp",
+                "assets/images/student/inquiry-math-report-06.webp"
+              ],
+              "pageRange": "5–6쪽"
+            },
+            {
+              "title": "우수 리포트 4",
+              "pages": [
+                "assets/images/student/inquiry-math-report-07.webp",
+                "assets/images/student/inquiry-math-report-08.webp"
+              ],
+              "pageRange": "7–8쪽"
+            },
+            {
+              "title": "우수 리포트 5",
+              "pages": [
+                "assets/images/student/inquiry-math-report-09.webp",
+                "assets/images/student/inquiry-math-report-10.webp"
+              ],
+              "pageRange": "9–10쪽"
+            },
+            {
+              "title": "우수 리포트 6",
+              "pages": [
+                "assets/images/student/inquiry-math-report-11.webp",
+                "assets/images/student/inquiry-math-report-12.webp"
+              ],
+              "pageRange": "11–12쪽"
+            },
+            {
+              "title": "우수 리포트 7",
+              "pages": [
+                "assets/images/student/inquiry-math-report-13.webp",
+                "assets/images/student/inquiry-math-report-14.webp"
+              ],
+              "pageRange": "13–14쪽"
+            }
+          ]
+        },
+        {
+          "id": "science",
+          "label": "과학",
+          "eyebrow": "OBSERVE · VERIFY · EXPLAIN",
+          "title": "생활 속 ‘왜?’에서 과학적 설명까지",
+          "lead": "과학 질문탐구는 자연과 일상에서 발견한 현상을 출발점으로 삼아, 궁금증을 확인 가능한 질문으로 다듬고 관찰·자료·실험 등의 근거를 통해 설명을 만들어 가는 탐구 영역입니다.",
+          "focus": [
+            {
+              "title": "질문 만들기",
+              "body": "무엇이 달라지는지, 왜 그런지, 어떤 조건에 따라 결과가 달라질지를 질문으로 표현하기"
+            },
+            {
+              "title": "근거 찾기",
+              "body": "현상 관찰, 관련 자료 조사, 변인과 조건의 비교, 가능한 실험 방법을 통해 근거 수집하기"
+            },
+            {
+              "title": "설명과 재검토",
+              "body": "관찰·자료와 예상이 일치하는지 확인하고 과학적 개념을 연결해 설명한 뒤 새로운 질문 만들기"
+            }
+          ],
+          "galleryTitle": "",
+          "gallery": []
+        }
+      ]
+    }
   },
   {
     "id": "question-relay",
     "category": "student",
     "title": "꼬꼬무 질문 릴레이",
     "subtitle": "질문이 질문을 낳고, 생각이 생각을 잇다!",
-    "introduction": "학년별 질문 게시판에서 친구의 질문에 자신의 생각을 더하고, 새로운 꼬리 질문을 이어가는 참여형 활동입니다. 서로 다른 관점과 생각을 연결하며 질문과 대답이 자연스럽게 이어지는 소통의 문화를 조성했습니다.",
+    "schedule": "(11월~12월 예정)",
+    "introduction": "학년별 질문 게시판에서 친구의 질문에 자신의 생각을 더하고, 새로운 꼬리 질문을 이어가는 참여형 활동입니다. 서로 다른 관점과 생각을 연결하며 질문과 대답이 자연스럽게 이어지는 소통의 문화를 조성할 예정입니다.",
     "process": [
       "학년별 질문 게시판에 자신의 궁금증을 질문으로 작성",
       "친구의 질문에 자신의 생각과 답변 작성",
       "기존 질문에 새로운 꼬리 질문을 연결하며 생각 확장"
     ],
-    "outcome": "하나의 질문이 여러 학생의 답변과 후속 질문으로 이어지며, 서로의 생각을 이해하고 새로운 관점에서 다시 질문하는 경험을 만들었습니다.",
+    "outcomeLabel": "기대 효과",
+    "outcome": "하나의 질문이 여러 학생의 답변과 후속 질문으로 이어지며, 서로의 생각을 이해하고 새로운 관점에서 다시 질문하는 경험을 만들고자 합니다.",
     "images": [],
     "resources": []
   }

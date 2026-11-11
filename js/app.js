@@ -77,6 +77,7 @@ function renderCategory(categoryId) {
       <h3>${item.title}</h3>
       <p class="activity-subtitle">${item.subtitle}</p>
       <p class="activity-preview">${item.introduction}</p>
+      ${item.schedule ? `<p class="activity-schedule">${item.schedule}</p>` : ""}
       <button type="button" data-open-activity="${item.id}">자세히 보기 <span>→</span></button>
     </article>
   `).join("");
@@ -108,17 +109,206 @@ function renderMQMonth(month) {
   `;
 }
 
+
+// 질문탐구대회: 영역별 기록과 우수 리포트 뷰어
+function inquiryGallery(gallery) {
+  if (!gallery?.length) return "";
+  return `<div class="inquiry-gallery">${gallery.map((image) => `
+    <figure class="inquiry-gallery-item ${image.kind === "work" ? "inquiry-work" : "inquiry-photo"}">
+      <a href="${image.src}" target="_blank" rel="noopener" aria-label="${image.alt} 이미지 크게 보기">
+        <img src="${image.src}" alt="${image.alt}" loading="lazy" />
+        <span>원본 크기로 보기 ↗</span>
+      </a>
+      <figcaption>${image.caption}</figcaption>
+    </figure>`).join("")}</div>`;
+}
+function renderInquiryReport(track, index) {
+  const report = track.reports?.[index];
+  if (!report) return "";
+  return `
+    <div class="inquiry-report-head"><div><b>${report.title}</b><span>${report.pageRange} · 전체 ${track.reports.length}개 기록 중 ${index + 1}번째</span></div>
+      <div class="inquiry-report-actions"><button type="button" data-inquiry-report-nav="prev" ${index === 0 ? "disabled" : ""}>이전</button><button type="button" data-inquiry-report-nav="next" ${index === track.reports.length - 1 ? "disabled" : ""}>다음</button></div>
+    </div>
+    <div class="inquiry-report-pages">${report.pages.map((src,i) => `
+      <figure><a href="${src}" target="_blank" rel="noopener" aria-label="${report.title} ${i+1}쪽 크게 보기"><img src="${src}" alt="${report.title} 리포트 ${i+1}쪽" loading="lazy" /></a><figcaption>${i === 0 ? "앞쪽" : "뒷쪽"} · 클릭하면 확대</figcaption></figure>`).join("")}</div>`;
+}
+function renderInquiryTrack(track, reportIndex = 0) {
+  if (!track) return "";
+  return `
+    <div class="inquiry-track-header"><span>${track.eyebrow}</span><h4>${track.title}</h4><p>${track.lead}</p></div>
+    <div class="inquiry-focus-grid">${track.focus.map((item,idx) => `
+      <article><span>${String(idx+1).padStart(2,"0")}</span><h5>${item.title}</h5><p>${item.body}</p></article>`).join("")}</div>
+    ${track.gallery?.length ? `
+      <div class="inquiry-gallery-header"><h4>${track.galleryTitle}</h4><p>${track.galleryIntro}</p></div>
+      ${inquiryGallery(track.gallery)}` : '<p class="inquiry-text-only">과학 영역은 요청에 따라 사진 없이 활동 설명만 수록했습니다.</p>'}
+    ${track.reports?.length ? `<div class="inquiry-report-section"><div class="inquiry-gallery-header"><h4>우수 학생 질문탐구 리포트</h4><p>${track.reportIntro}</p></div><div class="inquiry-report-viewer" data-report-index="${reportIndex}">${renderInquiryReport(track,reportIndex)}</div></div>` : ""}
+  `;
+}
+
+// 메이커 교과: 기술·가정 세 주제의 N-ASKIN 6단계 및 활동 기록
+function renderMakerTrack(track) {
+  if (!track) return "";
+  return `
+    <div class="maker-track-head">
+      <span>TECHNOLOGY · HOME ECONOMICS</span>
+      <h4>${track.title}</h4>
+      <div class="maker-driving-question"><b>핵심 질문</b><p>“${track.question}”</p></div>
+    </div>
+    <h5 class="maker-section-title">N-ASKIN 단계별 수업 활동</h5>
+    <div class="maker-steps">
+      ${track.steps.map((step, index) => `<article class="maker-step">
+        <div class="maker-step-identifier"><span>${String(index+1).padStart(2, "0")}</span><b>${step.code}</b></div>
+        <div><h6>${step.name}</h6><p>${step.detail}</p></div>
+      </article>`).join("")}
+    </div>
+    ${track.photos?.length ? `
+      <div class="maker-gallery-heading"><h5>${track.galleryTitle || "활동 사진"}</h5></div>
+      <div class="maker-gallery">
+        ${track.photos.map((photo) => `<figure>
+          <a href="${photo.src}" target="_blank" rel="noopener" aria-label="${photo.alt} 크게 보기">
+            <img src="${photo.src}" alt="${photo.alt}" loading="lazy" />
+          </a>
+          <figcaption>${photo.caption}</figcaption>
+        </figure>`).join("")}
+      </div>` : ""}
+    ${track.video ? `
+      <div class="maker-video-section">
+        <h5>${track.video.title}</h5>
+        <video controls playsinline preload="none" poster="${track.video.poster}" aria-label="${track.video.title}">
+          <source src="${track.video.src}" type="video/mp4" />
+          이 브라우저는 동영상 재생을 지원하지 않습니다.
+        </video>
+        <p>${track.video.caption}</p>
+      </div>` : ""}
+  `;
+}
+
+// v3.3 인문·사회 수업: 사회 세계지도와 국어 질문하는 독서 히어로
+function renderHumanitiesWork(track, index) {
+  const work = track.works?.[index];
+  if (!work) return "";
+  return `
+    <div class="humanities-work-nav">
+      <div><b>${work.label}</b><span>원본 활동 결과물 ${work.originalPage}쪽 · 선별 ${index + 1}/${track.works.length}</span></div>
+      <div class="humanities-work-actions">
+        <button type="button" data-humanities-work-nav="prev" ${index === 0 ? "disabled" : ""} aria-label="이전 학생 작품">이전</button>
+        <button type="button" data-humanities-work-nav="next" ${index === track.works.length - 1 ? "disabled" : ""} aria-label="다음 학생 작품">다음</button>
+      </div>
+    </div>
+    <figure class="humanities-work-page"><a href="${work.src}" target="_blank" rel="noopener" aria-label="${work.label} 원본 이미지 크게 보기"><img src="${work.src}" loading="lazy" alt="${work.label} — 개인정보 표시를 가린 독서 히어로 학생 학습지" /></a><figcaption>이미지를 누르면 원본 크기로 볼 수 있습니다.</figcaption></figure>
+  `;
+}
+function renderHumanitiesTrack(track) {
+  if (!track) return "";
+  return `
+    <div class="humanities-track-head">
+      <span>${track.eyebrow}</span>
+      <h4>${track.title}</h4>
+      <p class="humanities-subtitle">${track.subtitle}</p>
+      <p>${track.intro}</p>
+      <div class="humanities-driving-question"><small>${track.questionLabel || "핵심 탐구 질문"}</small><b>“${track.question}”</b></div>
+    </div>
+    <h5 class="humanities-subheading">${track.stepsTitle}</h5>
+    <div class="humanities-flow-grid">${track.steps.map((step,index)=>`
+      <article class="humanities-flow-step"><span>${String(index+1).padStart(2,"0")}</span><b>${step.code}</b><div><h6>${step.name}</h6><p>${step.detail}</p></div></article>
+    `).join("")}</div>
+    <div class="humanities-meaning"><b>활동의 의미</b><p>${track.meaning}</p></div>
+    ${track.photos?.length ? `
+      <h5 class="humanities-subheading">${track.galleryTitle}</h5>
+      <div class="humanities-gallery">${track.photos.map((photo)=>`<figure>
+        <a href="${photo.src}" target="_blank" rel="noopener" aria-label="${photo.alt} 크게 보기"><img src="${photo.src}" alt="${photo.alt}" loading="lazy" /></a>
+        <figcaption>${photo.caption}</figcaption></figure>`).join("")}</div>` : ""}
+    ${track.works?.length ? `
+      <div class="humanities-works">
+        <h5 class="humanities-subheading">학생 독서·질문 활동 결과물</h5>
+        <p class="humanities-works-intro">${track.worksIntro}</p>
+        <div class="humanities-work-viewer" data-work-index="0">${renderHumanitiesWork(track,0)}</div>
+      </div>` : ""}
+  `;
+}
+
 function openActivity(activityId) {
   const activity = activities.find((item) => item.id === activityId);
   if (!activity) return;
   const category = categories.find((item) => item.id === activity.category);
   const imageSection = activity.images?.length ? `<section class="dialog-section ${activity.mq ? "mq-photo-section" : ""}"><h3>${activity.mq ? "방송실 앞, 울림의 현장" : "사진 기록"}</h3><div class="dialog-gallery">${activity.images.map((image) => `<figure>${activity.mq ? `<a href="${image.src}" target="_blank" rel="noopener" aria-label="${image.alt || activity.title} 사진 크게 보기">` : ""}<img src="${image.src}" alt="${image.alt || activity.title}" loading="lazy" />${activity.mq ? "</a>" : ""}${image.caption ? `<figcaption>${image.caption}</figcaption>` : ""}</figure>`).join("")}</div></section>` : "";
   const resourceSection = activity.resources?.length ? `<section class="dialog-section"><h3>연결 자료</h3><div class="dialog-resources">${activity.resources.map((resource) => `<a href="${resource.url}" target="_blank" rel="noopener">${resource.label}<span>↗</span></a>`).join("")}</div></section>` : "";
+  const humanitiesSection = activity.humanitiesLessons?.tracks?.length ? `
+    <section class="dialog-section humanities-lesson-section">
+      <h3>국어·사회 질문탐구 수업 기록</h3>
+      <p class="humanities-overview">${activity.humanitiesLessons.intro}</p>
+      <div class="humanities-tabs" role="tablist" aria-label="국어 사회 질문탐구 활동 선택">
+        ${activity.humanitiesLessons.tracks.map((track,index)=>`<button type="button" role="tab" data-humanities-track="${track.id}" aria-selected="${index===0}" tabindex="${index===0?0:-1}">${track.label}</button>`).join("")}
+      </div>
+      <div class="humanities-track-panel" role="tabpanel" aria-live="polite">${renderHumanitiesTrack(activity.humanitiesLessons.tracks[0])}</div>
+    </section>
+  ` : "";
+  const makerSection = activity.makerLessons?.tracks?.length ? `
+    <section class="dialog-section maker-lesson-section">
+      <h3>기술·가정 N-ASKIN 질문탐구 수업</h3>
+      <p class="maker-overview">${activity.makerLessons.intro}</p>
+      <div class="maker-track-tabs" role="tablist" aria-label="기술가정 메이커 활동 선택">
+        ${activity.makerLessons.tracks.map((track, index) => `<button type="button" role="tab" data-maker-track="${track.id}" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">${track.label}</button>`).join("")}
+      </div>
+      <div class="maker-track-panel" role="tabpanel" aria-live="polite">${renderMakerTrack(activity.makerLessons.tracks[0])}</div>
+    </section>
+  ` : "";
+  const mathSection = activity.mathLesson ? `
+    <section class="dialog-section math-lesson-section">
+      <span class="math-lesson-eyebrow">${activity.mathLesson.tagline}</span>
+      <h3>${activity.mathLesson.title}</h3>
+      <p class="math-lesson-intro">${activity.mathLesson.intro}</p>
+      <div class="math-lesson-goals">
+        <b>학습 목표</b>
+        <ul>${activity.mathLesson.learningGoals.map((goal) => `<li>${goal}</li>`).join("")}</ul>
+        <p><strong>활용 도구</strong> ${activity.mathLesson.tools}</p>
+      </div>
+      <h4 class="math-lesson-subheading">N-ASKIN 수업 흐름</h4>
+      <div class="math-lesson-flow">
+        ${activity.mathLesson.steps.map((step, index) => `<article><span>${String(index + 1).padStart(2, "0")}</span><b>${step.code}</b><div><h5>${step.name}</h5><p>${step.detail}</p></div></article>`).join("")}
+      </div>
+      <h4 class="math-lesson-subheading">학생들이 직접 만든 질문</h4>
+      <p class="math-lesson-intro">${activity.mathLesson.questionIntro}</p>
+      <div class="math-question-grid">
+        ${activity.mathLesson.questionSamples.map((question) => `<article><small>${question.label}</small><p>“${question.question}”</p></article>`).join("")}
+      </div>
+      <h4 class="math-lesson-subheading">학생 질문 학습지 · 손글씨 기록</h4>
+      <p class="math-lesson-intro">${activity.mathLesson.galleryIntro}</p>
+      <div class="math-worksheet-gallery">
+        ${activity.mathLesson.gallery.map((item) => `<figure><a href="${item.src}" target="_blank" rel="noopener" aria-label="${item.caption} 확대 보기"><img src="${item.src}" loading="lazy" alt="${item.caption}, 학생 질문 작성 부분만 편집한 이미지" /></a><figcaption>${item.caption}<span>클릭해서 크게 보기 ↗</span></figcaption></figure>`).join("")}
+      </div>
+    </section>
+  ` : "";
   const highlightSection = activity.highlights?.length ? `
     <section class="dialog-section activity-highlight-section">
       <h3>운영 특징</h3>
       <div class="activity-highlight-grid">
         ${activity.highlights.map((highlight) => `<article><b>${highlight.title}</b><p>${highlight.body}</p></article>`).join("")}
+      </div>
+    </section>
+  ` : "";
+  const flowSection = activity.flowSteps?.length ? `
+    <section class="dialog-section naskin-flow-section">
+      <h3>N-ASKIN 6단계 흐름</h3>
+      <div class="naskin-flow-grid">
+        ${activity.flowSteps.map((step, index) => `<article><span>${String(index + 1).padStart(2, "0")}</span><b>${step.code}</b><h4>${step.title}</h4><p>${step.body}</p></article>`).join("")}
+      </div>
+    </section>
+  ` : "";
+  const comparisonSection = activity.comparison?.points?.length ? `
+    <section class="dialog-section naskin-comparison-section">
+      <div class="naskin-section-kicker">QUEST vs. N-ASKIN</div>
+      <h3>모델 비교로 보는 N-ASKIN의 확장성</h3>
+      <p class="naskin-comparison-intro">${activity.comparison.intro}</p>
+      <div class="naskin-comparison-table">
+        <div class="naskin-comparison-head aspect">비교 항목</div>
+        <div class="naskin-comparison-head quest">QUEST</div>
+        <div class="naskin-comparison-head naskin">N-ASKIN</div>
+        ${activity.comparison.points.map((point) => `
+          <div class="naskin-compare-aspect"><b>${point.aspect}</b></div>
+          <div class="naskin-compare-body quest"><p>${point.quest}</p></div>
+          <div class="naskin-compare-body naskin"><p>${point.naskin}</p></div>
+        `).join("")}
       </div>
     </section>
   ` : "";
@@ -143,6 +333,17 @@ function openActivity(activityId) {
       </div>
     </section>
   ` : "";
+
+  const inquirySection = activity.inquiry?.tracks?.length ? `
+    <section class="dialog-section inquiry-contest-section">
+      <span class="inquiry-kicker">QUESTION · INQUIRY · DISCOVERY</span>
+      <h3>인문·수리·과학 질문탐구의 기록</h3>
+      <p class="inquiry-overview">${activity.inquiry.intro}</p>
+      <div class="inquiry-track-tabs" role="tablist" aria-label="질문탐구대회 분야 선택">
+        ${activity.inquiry.tracks.map((track, index) => `<button type="button" role="tab" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}" data-inquiry-track="${track.id}">${track.label}</button>`).join("")}
+      </div>
+      <div class="inquiry-track-panel" role="tabpanel" aria-live="polite">${renderInquiryTrack(activity.inquiry.tracks[0])}</div>
+    </section>` : "";
 
   const mqSection = activity.mq ? `
     <section class="dialog-section mq-guide-section">
@@ -195,13 +396,20 @@ function openActivity(activityId) {
     <section class="dialog-section">
       <h3>활동 소개</h3>
       <p class="dialog-introduction">${activity.introduction}</p>
+      ${activity.schedule ? `<p class="dialog-schedule">${activity.schedule}</p>` : ""}
     </section>
     <section class="dialog-section">
       <h3>주요 과정</h3>
       <ol class="process-list">${activity.process.map((step, index) => `<li><b>${String(index + 1).padStart(2, "0")}</b><span>${step}</span></li>`).join("")}</ol>
     </section>
     ${highlightSection}
+    ${flowSection}
+    ${comparisonSection}
+    ${mathSection}
+    ${humanitiesSection}
+    ${makerSection}
     ${programSection}
+    ${inquirySection}
     ${mqSection}
     <section class="outcome-box">
       <span>${activity.outcomeLabel || "성과 또는 변화"}</span>
@@ -252,6 +460,83 @@ function openNaskinModel(modelId) {
 }
 
 document.addEventListener("click", (event) => {
+  const humanitiesTab = event.target.closest("[data-humanities-track]");
+  if (humanitiesTab) {
+    const section=humanitiesTab.closest(".humanities-lesson-section");
+    const activity=activities.find((item)=>item.id==="humanities-inquiry");
+    const track=activity?.humanitiesLessons?.tracks?.find((item)=>item.id===humanitiesTab.dataset.humanitiesTrack);
+    if (section && track) {
+      section.querySelectorAll("[data-humanities-track]").forEach((button)=>{
+        const selected=button===humanitiesTab;
+        button.setAttribute("aria-selected",String(selected));
+        button.tabIndex=selected?0:-1;
+      });
+      section.querySelector(".humanities-track-panel").innerHTML=renderHumanitiesTrack(track);
+    }
+    return;
+  }
+  const workNav=event.target.closest("[data-humanities-work-nav]");
+  if (workNav) {
+    const section=workNav.closest(".humanities-lesson-section");
+    const selectedTab=section?.querySelector('[data-humanities-track][aria-selected="true"]');
+    const activity=activities.find((item)=>item.id==="humanities-inquiry");
+    const track=activity?.humanitiesLessons?.tracks?.find((item)=>item.id===selectedTab?.dataset.humanitiesTrack);
+    const viewer=section?.querySelector(".humanities-work-viewer");
+    if (track?.works?.length && viewer) {
+      const current=Number(viewer.dataset.workIndex||0);
+      const offset=workNav.dataset.humanitiesWorkNav==="next"?1:-1;
+      const next=Math.max(0,Math.min(track.works.length-1,current+offset));
+      viewer.dataset.workIndex=String(next);
+      viewer.innerHTML=renderHumanitiesWork(track,next);
+    }
+    return;
+  }
+  const makerTab = event.target.closest("[data-maker-track]");
+  if (makerTab) {
+    const section = makerTab.closest(".maker-lesson-section");
+    const activity = activities.find((item) => item.id === "maker-inquiry");
+    const track = activity?.makerLessons?.tracks?.find((item) => item.id === makerTab.dataset.makerTrack);
+    if (section && track) {
+      section.querySelectorAll("[data-maker-track]").forEach((button) => {
+        const selected = button === makerTab;
+        button.setAttribute("aria-selected", String(selected));
+        button.tabIndex = selected ? 0 : -1;
+      });
+      section.querySelector(".maker-track-panel").innerHTML = renderMakerTrack(track);
+    }
+    return;
+  }
+  const inquiryTab = event.target.closest("[data-inquiry-track]");
+  if (inquiryTab) {
+    const contest = activities.find((item) => item.id === "inquiry-contest");
+    const track = contest?.inquiry?.tracks?.find((item) => item.id === inquiryTab.dataset.inquiryTrack);
+    const section = inquiryTab.closest(".inquiry-contest-section");
+    if (track && section) {
+      section.querySelectorAll("[data-inquiry-track]").forEach((tab) => {
+        const active = tab === inquiryTab;
+        tab.setAttribute("aria-selected", String(active));
+        tab.tabIndex = active ? 0 : -1;
+      });
+      section.querySelector(".inquiry-track-panel").innerHTML = renderInquiryTrack(track);
+    }
+    return;
+  }
+  const reportNav = event.target.closest("[data-inquiry-report-nav]");
+  if (reportNav) {
+    const section = reportNav.closest(".inquiry-contest-section");
+    const contest = activities.find((item) => item.id === "inquiry-contest");
+    const selected = section?.querySelector('[data-inquiry-track][aria-selected="true"]');
+    const track = contest?.inquiry?.tracks?.find((item) => item.id === selected?.dataset.inquiryTrack);
+    const viewer = section?.querySelector(".inquiry-report-viewer");
+    if (track?.reports && viewer) {
+      const current = Number(viewer.dataset.reportIndex || 0);
+      const next = Math.max(0, Math.min(track.reports.length - 1, current + (reportNav.dataset.inquiryReportNav === "next" ? 1 : -1)));
+      viewer.dataset.reportIndex = String(next);
+      viewer.innerHTML = renderInquiryReport(track, next);
+    }
+    return;
+  }
+
   const mqMonthTab = event.target.closest("[data-mq-month]");
   if (mqMonthTab) {
     const monthSection = mqMonthTab.closest(".mq-month-section");
