@@ -568,10 +568,34 @@ footer { color: #78a5c8; background: #06376c; }
 .orange .outcome-box { background: linear-gradient(135deg, #fff0e6, #fff8f3); }
 .outcome-box > span { display: block; }
 .outcome-box p { margin: 0; color: #284c70; font-size: 15px; font-weight: 700; line-height: 1.85; }
-.dialog-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-.dialog-gallery img { width: 100%; border-radius: 14px; }
+.activity-highlight-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.activity-highlight-grid article { padding: 20px; border: 1px solid #dbeaff; border-radius: 17px; background: linear-gradient(145deg, #f8fcff, #eef7ff); }
+.activity-highlight-grid b { display: block; margin-bottom: 8px; color: #1979bb; font-size: 13px; }
+.activity-highlight-grid p { margin: 0; color: #506a80; font-size: 12px; line-height: 1.7; }
+.dialog-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.dialog-gallery figure { overflow: hidden; margin: 0; border: 1px solid #dfebf5; border-radius: 16px; background: #f7fbff; }
+.dialog-gallery img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.dialog-gallery figcaption { padding: 12px 14px; color: #4f6b83; font-size: 11px; font-weight: 700; line-height: 1.55; }
 .dialog-resources { display: grid; gap: 8px; padding-bottom: 55px; }
 .dialog-resources a { display: flex; justify-content: space-between; padding: 16px 18px; border: 1px solid #dbeaff; border-radius: 13px; background: #f8fbff; font-weight: 700; }
+
+/* 퀘스트트립 체험별 질문탐구 */
+.quest-program-section { padding-top: 45px; }
+.quest-program-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.quest-program-card { display: flex; flex-direction: column; min-width: 0; padding: 25px; border: 1px solid #d6e9fb; border-radius: 21px; background: linear-gradient(145deg, #f8fcff, #eef7ff); box-shadow: 0 12px 30px rgba(32,101,160,.08); }
+.quest-program-heading { display: grid; grid-template-columns: 40px minmax(0, 1fr); align-items: start; gap: 12px; }
+.quest-program-heading > span { display: grid; place-items: center; width: 38px; height: 38px; color: white; border-radius: 50%; background: linear-gradient(135deg, #1388df, #496ee0); font-size: 10px; font-weight: 800; }
+.quest-program-heading b { display: inline-block; margin-bottom: 7px; padding: 4px 8px; color: #2670a9; border-radius: 999px; background: #dff1ff; font-size: 10px; line-height: 1.4; }
+.quest-program-heading h4 { margin: 0; color: #124e7f; font-family: "Jua", sans-serif; font-size: 23px; font-weight: 400; line-height: 1.25; }
+.quest-program-summary { margin: 19px 0 0; color: #506b83; font-size: 13px; line-height: 1.8; }
+.quest-program-question { display: grid; gap: 7px; margin: 20px 0 0; padding: 16px 17px; color: #174f7a; border: 0; border-left: 4px solid #3a8fd1; border-radius: 0 14px 14px 0; background: white; }
+.quest-program-question b { color: #1680cd; font-size: 10px; letter-spacing: .08em; }
+.quest-program-question span { font-size: 13px; font-weight: 800; line-height: 1.7; }
+.quest-program-activities { display: grid; gap: 9px; margin: 20px 0 0; padding: 0; counter-reset: quest-step; list-style: none; }
+.quest-program-activities li { position: relative; padding-left: 28px; color: #3d5f7a; font-size: 12px; line-height: 1.65; counter-increment: quest-step; }
+.quest-program-activities li::before { position: absolute; top: 1px; left: 0; display: grid; place-items: center; width: 20px; height: 20px; content: counter(quest-step); color: #2b78af; border-radius: 50%; background: #dcefff; font-size: 9px; font-weight: 800; }
+.quest-program-evidence { display: grid; gap: 5px; margin: auto 0 0; padding-top: 20px; color: #547087; font-size: 11px; line-height: 1.65; }
+.quest-program-evidence b { color: #1975b6; font-size: 10px; letter-spacing: .04em; }
 
 @media (max-width: 980px) {
   .activity-grid { grid-template-columns: repeat(2, 1fr); }
@@ -586,6 +610,8 @@ footer { color: #78a5c8; background: #06376c; }
   .activity-card { min-height: 350px; }
   .dialog-header { padding: 55px 25px 34px; }
   .dialog-section { padding: 30px 25px 0; }
+  .activity-highlight-grid { grid-template-columns: 1fr; }
+  .quest-program-grid { grid-template-columns: 1fr; }
   .outcome-box { margin: 30px 25px 40px; padding: 23px; }
 }
 

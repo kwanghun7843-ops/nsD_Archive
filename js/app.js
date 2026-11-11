@@ -87,8 +87,37 @@ function openActivity(activityId) {
   const activity = activities.find((item) => item.id === activityId);
   if (!activity) return;
   const category = categories.find((item) => item.id === activity.category);
-  const imageSection = activity.images?.length ? `<section class="dialog-section"><h3>사진 기록</h3><div class="dialog-gallery">${activity.images.map((image) => `<img src="${image.src}" alt="${image.alt || activity.title}" />`).join("")}</div></section>` : "";
+  const imageSection = activity.images?.length ? `<section class="dialog-section"><h3>사진 기록</h3><div class="dialog-gallery">${activity.images.map((image) => `<figure><img src="${image.src}" alt="${image.alt || activity.title}" loading="lazy" />${image.caption ? `<figcaption>${image.caption}</figcaption>` : ""}</figure>`).join("")}</div></section>` : "";
   const resourceSection = activity.resources?.length ? `<section class="dialog-section"><h3>연결 자료</h3><div class="dialog-resources">${activity.resources.map((resource) => `<a href="${resource.url}" target="_blank" rel="noopener">${resource.label}<span>↗</span></a>`).join("")}</div></section>` : "";
+  const highlightSection = activity.highlights?.length ? `
+    <section class="dialog-section activity-highlight-section">
+      <h3>운영 특징</h3>
+      <div class="activity-highlight-grid">
+        ${activity.highlights.map((highlight) => `<article><b>${highlight.title}</b><p>${highlight.body}</p></article>`).join("")}
+      </div>
+    </section>
+  ` : "";
+  const programSection = activity.programs?.length ? `
+    <section class="dialog-section quest-program-section">
+      <h3>체험별 질문탐구</h3>
+      <div class="quest-program-grid">
+        ${activity.programs.map((program, index) => `
+          <article class="quest-program-card">
+            <header class="quest-program-heading">
+              <span>${String(index + 1).padStart(2, "0")}</span>
+              <div><b>${program.focus}</b><h4>${program.title}</h4></div>
+            </header>
+            <p class="quest-program-summary">${program.summary}</p>
+            <blockquote class="quest-program-question"><b>탐구 질문</b><span>“${program.question}”</span></blockquote>
+            <ol class="quest-program-activities">
+              ${program.activities.map((step) => `<li>${step}</li>`).join("")}
+            </ol>
+            <p class="quest-program-evidence"><b>남기는 근거</b><span>${program.evidence}</span></p>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  ` : "";
 
   dialog.className = `activity-dialog ${category?.color || "blue"}`;
   dialogContent.innerHTML = `
@@ -105,6 +134,8 @@ function openActivity(activityId) {
       <h3>주요 과정</h3>
       <ol class="process-list">${activity.process.map((step, index) => `<li><b>${String(index + 1).padStart(2, "0")}</b><span>${step}</span></li>`).join("")}</ol>
     </section>
+    ${highlightSection}
+    ${programSection}
     <section class="outcome-box">
       <span>${activity.outcomeLabel || "성과 또는 변화"}</span>
       <p>${activity.outcome}</p>

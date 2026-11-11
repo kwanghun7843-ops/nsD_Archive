@@ -86,7 +86,7 @@ window.archiveActivities.push(...[
     "images": [],
     "resources": [
       {
-        "label": "정보교과 메이커 질문탐구",
+        "label": "정보교과(알고리즘과 프로그래밍) — Padlet",
         "url": "https://padlet.com/ipad821883/1-1-ndz9fh93g78wmpgv"
       },
       {
