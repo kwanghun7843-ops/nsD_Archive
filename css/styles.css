@@ -902,7 +902,7 @@ footer { color: #78a5c8; background: #06376c; }
 /* v3.2 기술·가정 메이커 N-ASKIN 세 사례 및 현장 기록 */
 .maker-lesson-section { padding-top: 38px; }
 .maker-overview { margin: 0 0 21px; color: #61718a; font-size: 12px; line-height: 1.9; }
-.maker-track-tabs { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; margin: 16px 0 22px; }
+.maker-track-tabs { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 10px; margin: 16px 0 22px; }
 .maker-track-tabs button { min-height: 51px; padding: 12px 8px; border: 1px solid #cce4f5; border-radius: 13px; background: #f5faff; color: #235c7c; font: inherit; font-weight: 800; font-size: 12px; cursor: pointer; }
 .maker-track-tabs button[aria-selected="true"] { color: white; background: #2073a5; border-color: #2073a5; box-shadow: 0 7px 18px rgba(28,118,169,.17); }
 .maker-track-tabs button:focus-visible, .maker-gallery a:focus-visible { outline: 3px solid #f5bd72; outline-offset: 3px; }
@@ -977,3 +977,15 @@ footer { color: #78a5c8; background: #06376c; }
 .humanities-work-page figcaption { text-align:center; padding-top:11px; color:#7d8497; font-size:10px; }
 @media (max-width:700px) { .humanities-flow-grid{grid-template-columns:1fr;} }
 @media (max-width:520px) { .humanities-track-head{padding:18px 16px;} .humanities-flow-step{grid-template-columns:25px 40px minmax(0,1fr);padding:13px 10px;gap:7px;} .humanities-gallery{grid-template-columns:1fr;} .humanities-work-page{padding:8px;} .humanities-tabs button{padding:8px 5px;font-size:11px;} }
+
+/* v3.4.2: 메이커 > 정보교과 디지털 활동 */
+.maker-info-description { margin: 12px 0 0; color: #547087; font-size: 12px; line-height: 1.8; }
+.maker-info-project-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
+.maker-info-project { padding: 20px 20px 22px; background: #f8fbff; border: 1px solid #dcebf6; border-radius: 16px; }
+.maker-info-project-number { color: #5b9bc4; font-size: 11px; font-weight: 900; letter-spacing: .1em; }
+.maker-info-project h6 { margin: 8px 0 10px; color: #215f83; font-size: 17px; }
+.maker-info-project > p { margin: 0 0 15px; color: #57758a; font-size: 12px; line-height: 1.85; }
+.maker-info-links { display: grid; gap: 8px; }
+.maker-info-links a { display:flex; align-items:center; justify-content:space-between; gap:8px; padding: 12px 14px; color: #16669d; background: #fff; border: 1px solid #cee3f3; border-radius: 10px; font-size: 12px; font-weight: 800; text-decoration: none; }
+.maker-info-links a:hover, .maker-info-links a:focus-visible { color: #0c4b75; background:#edf7ff; outline-offset:2px; }
+@media (max-width: 720px) { .maker-track-tabs { grid-template-columns: repeat(2,minmax(0,1fr)); } .maker-info-project-grid { grid-template-columns:1fr; } }

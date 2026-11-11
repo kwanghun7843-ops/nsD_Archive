@@ -11,6 +11,16 @@ const naskinModelGrid = document.querySelector("#naskin-model-grid");
 const dialog = document.querySelector("#activity-dialog");
 const dialogContent = document.querySelector("#dialog-content");
 
+// 상세창을 다시 열 때 이전 활동의 스크롤 위치를 이어받지 않습니다.
+function showDialogFromTop() {
+  if (typeof dialog.showModal === "function" && !dialog.open) dialog.showModal();
+  dialog.scrollTop = 0;
+  // 브라우저가 자동 포커스를 이동한 뒤에도 제목이 맨 위에 보이도록 보정합니다.
+  requestAnimationFrame(() => {
+    if (dialog.open) dialog.scrollTop = 0;
+  });
+}
+
 const activityCount = (categoryId) => activities.filter((item) => item.category === categoryId).length;
 
 overview.innerHTML = categories.map((category) => `
@@ -148,6 +158,26 @@ function renderInquiryTrack(track, reportIndex = 0) {
 // 메이커 교과: 기술·가정 세 주제의 N-ASKIN 6단계 및 활동 기록
 function renderMakerTrack(track) {
   if (!track) return "";
+  if (track.projects?.length) {
+    return `
+      <div class="maker-track-head">
+        <span>INFORMATICS · DIGITAL MAKING</span>
+        <h4>${track.title}</h4>
+        <p class="maker-info-description">${track.description}</p>
+        <div class="maker-driving-question"><b>핵심 질문</b><p>“${track.question}”</p></div>
+      </div>
+      <h5 class="maker-section-title">정보교과 활동과 디지털 결과물</h5>
+      <div class="maker-info-project-grid">
+        ${track.projects.map((project, index) => `<article class="maker-info-project">
+          <span class="maker-info-project-number">${String(index + 1).padStart(2, "0")}</span>
+          <h6>${project.title}</h6>
+          <p>${project.description}</p>
+          <div class="maker-info-links">
+            ${project.resources.map((resource) => `<a href="${resource.url}" target="_blank" rel="noopener noreferrer">${resource.label}<span aria-hidden="true">↗</span></a>`).join("")}
+          </div>
+        </article>`).join("")}
+      </div>`;
+  }
   return `
     <div class="maker-track-head">
       <span>TECHNOLOGY · HOME ECONOMICS</span>
@@ -417,7 +447,7 @@ function openActivity(activityId) {
     </section>
     ${imageSection}${mqArchiveSection}${resourceSection}
   `;
-  if (typeof dialog.showModal === "function") dialog.showModal();
+  showDialogFromTop();
 }
 
 function openNaskinModel(modelId) {
@@ -456,7 +486,7 @@ function openNaskinModel(modelId) {
       <div>${model.subjects.map((subject) => `<span>${subject}</span>`).join("")}</div>
     </section>
   `;
-  if (typeof dialog.showModal === "function") dialog.showModal();
+  showDialogFromTop();
 }
 
 document.addEventListener("click", (event) => {
@@ -583,6 +613,7 @@ tabs.addEventListener("keydown", (event) => {
   tabs.querySelector(`[data-category="${nextId}"]`).focus();
 });
 
+dialog.addEventListener("close", () => { dialog.scrollTop = 0; });
 document.querySelector(".dialog-close").addEventListener("click", () => dialog.close());
 dialog.addEventListener("click", (event) => {
   if (event.target === dialog) dialog.close();
