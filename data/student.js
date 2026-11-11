@@ -14,7 +14,12 @@ window.archiveActivities.push(...[
     ],
     "outcome": "독서와 일상에서 발견한 궁금증을 자유롭게 표현하고, 질문을 통해 자신의 생각과 하루를 성찰하는 습관을 길렀습니다.",
     "images": [],
-    "resources": []
+    "resources": [
+      {
+        "label": "N-A 모먼트 2-5 활동 기록",
+        "url": "https://padlet.com/ipad444304/2-5-n-a-xl2vdnncb4jk2430"
+      }
+    ]
   },
   {
     "id": "mq-project",

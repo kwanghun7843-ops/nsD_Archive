@@ -19,17 +19,42 @@ window.archiveActivities.push(...[
   {
     "id": "humanities-inquiry",
     "category": "class",
-    "title": "인문 교과 질문탐구",
+    "title": "인문·사회 교과 질문탐구",
     "subtitle": "읽고, 질문하고, 다양한 관점으로 생각을 넓히다!",
-    "introduction": "국어과의 방과후 독서 프로그램과 영어과의 AI 활용 질문·성찰 프로그램을 통해 학생들이 다양한 생각과 관점을 탐색했습니다. 읽기와 질문, AI와 성찰을 연결하여 자신의 생각을 깊이 있게 표현하는 활동을 운영했습니다.",
+    "introduction": "국어과의 독서 프로그램, 영어과의 AI 활용 포스터 제작, 도덕과의 가상공간 에티켓 탐구를 통해 학생들이 다양한 생각과 관점을 탐색했습니다. 읽기와 질문, AI 활용과 성찰을 연결하여 자신의 생각을 깊이 있게 표현하는 활동을 운영했습니다.",
     "process": [
       "국어: 독서 자료에서 궁금증과 탐구 질문 발견",
-      "영어: AI를 활용하여 질문을 발전시키고 다양한 관점 탐색",
-      "탐구 내용을 정리하고 자신의 생각과 배움을 성찰"
+      "영어: AI를 활용하여 질문을 발전시키고 탐구 결과를 포스터로 표현",
+      "도덕: 가상공간과 에티켓을 주제로 질문하고 자신의 판단을 성찰"
     ],
-    "outcome": "독서와 AI 활용을 단순한 내용 이해에 머무르게 하지 않고, 질문을 통해 생각을 발전시키며 자신의 관점을 표현하고 성찰하는 배움으로 연결했습니다.",
+    "outcome": "독서와 AI 활용, 도덕적 판단을 단순한 내용 이해에 머무르게 하지 않고, 질문을 통해 생각을 발전시키며 자신의 관점을 표현하고 성찰하는 배움으로 연결했습니다.",
     "images": [],
-    "resources": []
+    "resources": [
+      {
+        "label": "영어과 AI 포스터 만들기 — 2-1",
+        "url": "https://padlet.com/ipad432186/1-ai-2-1-s024vs60znlc2w2tsob8"
+      },
+      {
+        "label": "영어과 AI 포스터 만들기 — 2-2",
+        "url": "https://padlet.com/ipad432186/1-ai-2-2-s024vtooqd6vrtejwftu"
+      },
+      {
+        "label": "영어과 AI 포스터 만들기 — 2-3",
+        "url": "https://padlet.com/ipad432186/1-ai-2-3-s024vvgpyr5ekmsscz8t"
+      },
+      {
+        "label": "영어과 AI 포스터 만들기 — 2-4",
+        "url": "https://padlet.com/ipad432186/1-ai-2-4-s024vvnd0va4cddfctoh"
+      },
+      {
+        "label": "영어과 AI 포스터 만들기 — 2-5",
+        "url": "https://padlet.com/ipad432186/1-ai-2-5-s024w0pl9lfwqwz6d2js"
+      },
+      {
+        "label": "도덕 질문탐구 — 가상공간과 에티켓",
+        "url": "https://canva.link/g7n6od6e9hvacvo"
+      }
+    ]
   },
   {
     "id": "stem-inquiry",
@@ -51,15 +76,28 @@ window.archiveActivities.push(...[
     "category": "class",
     "title": "메이커 교과 질문탐구",
     "subtitle": "질문을 아이디어로, 생각을 작품으로 만들다!",
-    "introduction": "기술·가정 교과의 미니카·그래비트랙스 활동과 정보과의 영상 제작을 통해 학생들의 질문과 아이디어를 실제 결과물로 연결했습니다. 제작과 탐구를 연계하여 생각을 구체화하고, 직접 구현하며 개선하는 경험을 제공했습니다.",
+    "introduction": "기술·가정 교과의 미니카·그래비트랙스 활동과 정보과의 식물탐구도감 제작을 통해 학생들의 질문과 아이디어를 실제 결과물로 연결했습니다. 제작과 탐구를 연계하여 생각을 구체화하고, 직접 구현하며 개선하는 경험을 제공했습니다.",
     "process": [
       "활동 주제에서 문제를 발견하고 질문과 아이디어 구상",
-      "미니카·그래비트랙스 또는 영상 콘텐츠를 설계하고 제작",
+      "미니카·그래비트랙스 또는 디지털 식물탐구도감을 설계하고 제작",
       "제작 결과를 확인·개선하고 과정에서 배운 내용 공유"
     ],
     "outcome": "학생들은 질문에서 출발한 아이디어를 직접 설계하고 제작하며, 결과를 확인하고 개선하는 메이커 탐구 과정을 경험했습니다.",
     "images": [],
-    "resources": []
+    "resources": [
+      {
+        "label": "정보교과 메이커 질문탐구",
+        "url": "https://padlet.com/ipad821883/1-1-ndz9fh93g78wmpgv"
+      },
+      {
+        "label": "식물탐구도감 — Canva 결과물",
+        "url": "https://canva.link/3wblp3dugc2w4gm"
+      },
+      {
+        "label": "식물탐구도감 — Padlet 기록",
+        "url": "https://padlet.com/ipad821883/1-1-6xt7mughme1kqi3z"
+      }
+    ]
   },
   {
     "id": "open-class",

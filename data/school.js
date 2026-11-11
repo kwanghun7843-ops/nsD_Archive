@@ -44,7 +44,24 @@ window.archiveActivities.push(...[
     ],
     "outcome": "체험학습이 단순한 관람과 체험을 넘어, 학생이 자신의 질문을 가지고 현장을 주의 깊게 관찰하며 배움을 스스로 구성하고 성찰하는 탐구 활동으로 발전했습니다.",
     "images": [],
-    "resources": []
+    "resources": [
+      {
+        "label": "여름방학 인공지능 체험학습",
+        "url": "https://padlet.com/ipad444304/2026-letvc1e3sztmsqy2"
+      },
+      {
+        "label": "1학년 디지털 체험학습",
+        "url": "https://padlet.com/ipad444304/1-1-l2hcrlzgb0gq6ax2"
+      },
+      {
+        "label": "2학년 대구 문화체험학습",
+        "url": "https://padlet.com/ipad444304/2-5-s0249nk2rut0qcicf2s8"
+      },
+      {
+        "label": "전교생 아트피크닉",
+        "url": "https://padlet.com/taya1104/2026-wk1vci9ub9ygiabf"
+      }
+    ]
   },
   {
     "id": "peer-pharmacy",
@@ -74,6 +91,11 @@ window.archiveActivities.push(...[
     ],
     "outcome": "학생들은 자신이 남긴 질문을 다시 읽으며 생각과 관점이 어떻게 달라졌는지 발견하고, 질문의 기록이 자신의 성장 기록이 될 수 있음을 경험했습니다.",
     "images": [],
-    "resources": []
+    "resources": [
+      {
+        "label": "365일의 기록 — Padlet",
+        "url": "https://padlet.com/NS_WeeClass/365-s024ijf21c1ybzw4f0mm"
+      }
+    ]
   }
 ]);
