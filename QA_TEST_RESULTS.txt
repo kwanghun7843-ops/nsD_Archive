@@ -1,0 +1,105 @@
+SUCCESS: 18 card renders, 7 multitab sets, full text and resource checks
+[
+  [
+    "question-wings",
+    []
+  ],
+  [
+    "question-treasure-hunter",
+    []
+  ],
+  [
+    "quest-trip",
+    [
+      "디지털 체험학습",
+      "인공지능 체험학습",
+      "대구 문화체험학습",
+      "아트피크닉"
+    ]
+  ],
+  [
+    "peer-pharmacy",
+    []
+  ],
+  [
+    "365-record",
+    []
+  ],
+  [
+    "carbon-neutral-deodorizer",
+    []
+  ],
+  [
+    "na-moment",
+    [
+      "아침 독서 질문",
+      "100일 감사일기",
+      "삶의 가치 질문"
+    ]
+  ],
+  [
+    "mq-project",
+    [
+      "참여 방법",
+      "선정 기준",
+      "월별 질문·답변"
+    ]
+  ],
+  [
+    "inquiry-contest",
+    [
+      "인문학",
+      "수학",
+      "과학"
+    ]
+  ],
+  [
+    "question-relay",
+    []
+  ],
+  [
+    "naskin-model",
+    []
+  ],
+  [
+    "humanities-inquiry",
+    [
+      "국어",
+      "사회",
+      "영어",
+      "도덕"
+    ]
+  ],
+  [
+    "stem-inquiry",
+    [
+      "수학",
+      "과학"
+    ]
+  ],
+  [
+    "maker-inquiry",
+    [
+      "미니카 조립·개조",
+      "교량 만들기",
+      "그래비트랙스",
+      "정보교과"
+    ]
+  ],
+  [
+    "open-class",
+    []
+  ],
+  [
+    "teacher-training",
+    []
+  ],
+  [
+    "teacher-study-group",
+    []
+  ],
+  [
+    "regional-sharing",
+    []
+  ]
+]

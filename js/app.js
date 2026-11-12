@@ -257,32 +257,27 @@ function renderHumanitiesTrack(track) {
   `;
 }
 
-function openActivity(activityId) {
-  const activity = activities.find((item) => item.id === activityId);
-  if (!activity) return;
-  const category = categories.find((item) => item.id === activity.category);
-  const imageSection = activity.images?.length ? `<section class="dialog-section ${activity.mq ? "mq-photo-section" : ""}"><h3>${activity.mq ? "방송실 앞, 울림의 현장" : "사진 기록"}</h3><div class="dialog-gallery">${activity.images.map((image) => `<figure>${activity.mq ? `<a href="${image.src}" target="_blank" rel="noopener" aria-label="${image.alt || activity.title} 사진 크게 보기">` : ""}<img src="${image.src}" alt="${image.alt || activity.title}" loading="lazy" />${activity.mq ? "</a>" : ""}${image.caption ? `<figcaption>${image.caption}</figcaption>` : ""}</figure>`).join("")}</div></section>` : "";
-  const resourceSection = activity.resources?.length ? `<section class="dialog-section"><h3>연결 자료</h3><div class="dialog-resources">${activity.resources.map((resource) => `<a href="${resource.url}" target="_blank" rel="noopener">${resource.label}<span>↗</span></a>`).join("")}</div></section>` : "";
-  const humanitiesSection = activity.humanitiesLessons?.tracks?.length ? `
-    <section class="dialog-section humanities-lesson-section">
-      <h3>국어·사회 질문탐구 수업 기록</h3>
-      <p class="humanities-overview">${activity.humanitiesLessons.intro}</p>
-      <div class="humanities-tabs" role="tablist" aria-label="국어 사회 질문탐구 활동 선택">
-        ${activity.humanitiesLessons.tracks.map((track,index)=>`<button type="button" role="tab" data-humanities-track="${track.id}" aria-selected="${index===0}" tabindex="${index===0?0:-1}">${track.label}</button>`).join("")}
-      </div>
-      <div class="humanities-track-panel" role="tabpanel" aria-live="polite">${renderHumanitiesTrack(activity.humanitiesLessons.tracks[0])}</div>
-    </section>
-  ` : "";
-  const makerSection = activity.makerLessons?.tracks?.length ? `
-    <section class="dialog-section maker-lesson-section">
-      <h3>기술·가정 N-ASKIN 질문탐구 수업</h3>
-      <p class="maker-overview">${activity.makerLessons.intro}</p>
-      <div class="maker-track-tabs" role="tablist" aria-label="기술가정 메이커 활동 선택">
-        ${activity.makerLessons.tracks.map((track, index) => `<button type="button" role="tab" data-maker-track="${track.id}" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">${track.label}</button>`).join("")}
-      </div>
-      <div class="maker-track-panel" role="tabpanel" aria-live="polite">${renderMakerTrack(activity.makerLessons.tracks[0])}</div>
-    </section>
-  ` : "";
+// v3.5 활동 상세 화면 공통 템플릿: 소개 → 세부 탭 → 선택 내용 → 성과·자료
+function renderActivityProcess(activity) {
+  if (!activity.process?.length) return "";
+  return `<ol class="process-list">${activity.process.map((step, index) => `<li><b>${String(index + 1).padStart(2, "0")}</b><span>${step}</span></li>`).join("")}</ol>`;
+}
+function renderActivityImages(images, title = "활동 사진") {
+  if (!images?.length) return "";
+  return `<div class="dialog-gallery detail-image-gallery">${images.map((img) => `<figure>
+    <a href="${img.src}" target="_blank" rel="noopener" aria-label="${img.alt || title} 크게 보기"><img src="${img.src}" alt="${img.alt || title}" loading="lazy" /></a>
+    ${img.caption ? `<figcaption>${img.caption}</figcaption>` : ""}
+  </figure>`).join("")}</div>`;
+}
+function renderActivityResources(resources, title = "연결 자료") {
+  if (!resources?.length) return "";
+  return `<section class="dialog-section detail-resource-section"><h3>${title}</h3><div class="dialog-resources">${resources.map((r) => `<a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.label}<span aria-hidden="true">↗</span></a>`).join("")}</div></section>`;
+}
+function renderActivityHighlight(activity) {
+  if (!activity.highlights?.length) return "";
+  return `<section class="dialog-section activity-highlight-section"><h3>운영 특징</h3><div class="activity-highlight-grid">${activity.highlights.map((h) => `<article><b>${h.title}</b><p>${h.body}</p></article>`).join("")}</div></section>`;
+}
+function renderStandardExtras(activity) {
   const mathSection = activity.mathLesson ? `
     <section class="dialog-section math-lesson-section">
       <span class="math-lesson-eyebrow">${activity.mathLesson.tagline}</span>
@@ -342,80 +337,113 @@ function openActivity(activityId) {
       </div>
     </section>
   ` : "";
-  const programSection = activity.programs?.length ? `
-    <section class="dialog-section quest-program-section">
-      <h3>체험별 질문탐구</h3>
-      <div class="quest-program-grid">
-        ${activity.programs.map((program, index) => `
-          <article class="quest-program-card">
-            <header class="quest-program-heading">
-              <span>${String(index + 1).padStart(2, "0")}</span>
-              <div><b>${program.focus}</b><h4>${program.title}</h4></div>
-            </header>
-            <p class="quest-program-summary">${program.summary}</p>
-            <blockquote class="quest-program-question"><b>탐구 질문</b><span>“${program.question}”</span></blockquote>
-            <ol class="quest-program-activities">
-              ${program.activities.map((step) => `<li>${step}</li>`).join("")}
-            </ol>
-            <p class="quest-program-evidence"><b>남기는 근거</b><span>${program.evidence}</span></p>
-          </article>
-        `).join("")}
-      </div>
-    </section>
-  ` : "";
 
-  const inquirySection = activity.inquiry?.tracks?.length ? `
-    <section class="dialog-section inquiry-contest-section">
-      <span class="inquiry-kicker">QUESTION · INQUIRY · DISCOVERY</span>
-      <h3>인문·수리·과학 질문탐구의 기록</h3>
-      <p class="inquiry-overview">${activity.inquiry.intro}</p>
-      <div class="inquiry-track-tabs" role="tablist" aria-label="질문탐구대회 분야 선택">
-        ${activity.inquiry.tracks.map((track, index) => `<button type="button" role="tab" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}" data-inquiry-track="${track.id}">${track.label}</button>`).join("")}
-      </div>
-      <div class="inquiry-track-panel" role="tabpanel" aria-live="polite">${renderInquiryTrack(activity.inquiry.tracks[0])}</div>
-    </section>` : "";
+  return `${flowSection}${comparisonSection}${mathSection}`;
+}
 
-  const mqSection = activity.mq ? `
-    <section class="dialog-section mq-guide-section">
-      <div class="mq-section-kicker">MUSIC & QUESTION</div>
-      <h3>어떻게 질문할까요?</h3>
-      <p class="mq-guide-intro">${activity.mq.guideIntro}</p>
-      <div class="mq-writing-checklist">
-        <h4>좋은 질문을 위한 3대 체크리스트</h4>
-        <div>${activity.mq.checklist.map((point) => `<article><b>${point.title}</b><span>${point.body}</span></article>`).join("")}</div>
-      </div>
-      <div class="mq-route-grid">
-        ${activity.mq.routes.map((route) => `<article><strong>${route.title}</strong><p>${route.body}</p></article>`).join("")}
-      </div>
-      <div class="mq-guide-grid">
-        ${activity.mq.guides.map((guide) => `<figure>
-          <a href="${guide.src}" target="_blank" rel="noopener" aria-label="${guide.title} 크게 보기"><img src="${guide.src}" alt="${guide.alt}" loading="lazy" /></a>
-          <figcaption><b>${guide.title}</b><span>${guide.caption}</span></figcaption>
-        </figure>`).join("")}
-      </div>
-    </section>
-    <section class="dialog-section mq-criteria-section">
-      <h3>무엇을 기준으로 선정할까요?</h3>
-      <div class="mq-criteria-grid">
-        ${activity.mq.criteria.map((criteria) => `<article>
-          <h4>${criteria.title}</h4>
-          <ul>${criteria.items.map((item) => `<li><b>${item.name}</b><span>${item.detail}</span></li>`).join("")}</ul>
-        </article>`).join("")}
-      </div>
-    </section>
-  ` : "";
-  const mqArchiveSection = activity.mq?.months?.length ? `
-    <section class="dialog-section mq-month-section">
-      <div class="mq-section-kicker">MONTHLY ARCHIVE · 2026</div>
-      <h3>이달의 베스트 질문 & 답변</h3>
-      <p class="mq-guide-intro">${activity.mq.monthlyIntro}</p>
-      <div class="mq-month-tabs" role="tablist" aria-label="월별 베스트 질문과 답변">
-        ${activity.mq.months.map((month, index) => `<button type="button" role="tab" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}" data-mq-month="${index}">${month.month.replace("2026년 ", "")}</button>`).join("")}
-      </div>
-      <div class="mq-month-panel" role="tabpanel" aria-live="polite">${renderMQMonth(activity.mq.months[0])}</div>
-    </section>
-  ` : "";
-
+function renderQuestProgram(program, index, resource) {
+  return `<article class="quest-program-card detail-quest-card">
+    <header class="quest-program-heading"><span>${String(index + 1).padStart(2, "0")}</span><div><b>${program.focus}</b><h4>${program.title}</h4></div></header>
+    <p class="quest-program-summary">${program.summary}</p>
+    <blockquote class="quest-program-question"><b>핵심 탐구 질문</b><span>“${program.question}”</span></blockquote>
+    <h5 class="detail-subheading">현장 탐구 과정</h5>
+    <ol class="quest-program-activities">${program.activities.map((item) => `<li>${item}</li>`).join("")}</ol>
+    <p class="quest-program-evidence"><b>남기는 근거</b><span>${program.evidence}</span></p>
+    ${resource ? `<div class="detail-track-resources"><a href="${resource.url}" target="_blank" rel="noopener noreferrer">${resource.label} <span aria-hidden="true">↗</span></a></div>` : ""}
+  </article>`;
+}
+function renderNAMoment(activity, index) {
+  const h = activity.highlights[index];
+  if (!h) return "";
+  const imageGroups = [[], activity.images.slice(4), activity.images.slice(0,4)];
+  const steps = [activity.process.slice(0,2), activity.process.slice(2,3), activity.process.slice(3)];
+  return `<div class="detail-track-head"><span>NOTICE · ASK · REFLECT</span><h4>${h.title}</h4><p>${h.body}</p></div>
+    <h5 class="detail-subheading">활동 과정</h5>
+    <ol class="detail-simple-steps">${steps[index].map((step) => `<li>${step}</li>`).join("")}</ol>
+    ${imageGroups[index].length ? `<h5 class="detail-subheading">활동 사진과 기록</h5>${renderActivityImages(imageGroups[index], h.title)}` : ""}
+    ${index === 0 ? `<div class="detail-track-resources">${activity.resources.map((r) => `<a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.label} <span aria-hidden="true">↗</span></a>`).join("")}</div>` : ""}`;
+}
+function renderMQGuide(activity) {
+  const mq = activity.mq;
+  return `<div class="detail-track-head"><span>MUSIC & QUESTION</span><h4>메아리함에서 시작된 질문</h4><p>${mq.guideIntro}</p></div>
+    <div class="mq-writing-checklist"><h4>좋은 질문을 위한 3대 체크리스트</h4><div>${mq.checklist.map((c) => `<article><b>${c.title}</b><span>${c.body}</span></article>`).join("")}</div></div>
+    <div class="mq-route-grid">${mq.routes.map((r) => `<article><strong>${r.title}</strong><p>${r.body}</p></article>`).join("")}</div>
+    <h5 class="detail-subheading">M&Q 작성 가이드</h5>
+    <div class="mq-guide-grid">${mq.guides.map((g) => `<figure><a href="${g.src}" target="_blank" rel="noopener" aria-label="${g.title} 크게 보기"><img src="${g.src}" alt="${g.alt}" loading="lazy" /></a><figcaption><b>${g.title}</b><span>${g.caption}</span></figcaption></figure>`).join("")}</div>
+    <h5 class="detail-subheading">방송실 앞 울림의 현장</h5>${renderActivityImages(activity.images, "M&Q 현장")}`;
+}
+function renderMQCriteria(activity) {
+  return `<div class="detail-track-head"><span>BEST QUESTION & ANSWER</span><h4>좋은 질문과 답변을 선정하는 기준</h4><p>매월 서로 다른 관점을 담은 질문과 답변을 선정하여 학교 전체에 공유했습니다.</p></div>
+  <div class="mq-criteria-grid">${activity.mq.criteria.map((c) => `<article><h4>${c.title}</h4><ul>${c.items.map((item) => `<li><b>${item.name}</b><span>${item.detail}</span></li>`).join("")}</ul></article>`).join("")}</div>`;
+}
+function renderMQArchive(activity) {
+  const months = activity.mq.months;
+  return `<div class="mq-month-section">
+    <div class="detail-track-head"><span>MONTHLY ARCHIVE · 2026</span><h4>이달의 베스트 질문 & 답변</h4><p>${activity.mq.monthlyIntro}</p></div>
+    <div class="mq-month-tabs" role="tablist" aria-label="월별 베스트 질문과 답변">
+      ${months.map((m,i) => `<button type="button" role="tab" data-mq-month="${i}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${m.month.replace("2026년 ", "")}</button>`).join("")}
+    </div>
+    <div class="mq-month-panel" role="tabpanel" aria-live="polite">${renderMQMonth(months[0])}</div>
+  </div>`;
+}
+function renderHumanitiesLinkTrack(activity, subject) {
+  const isEnglish = subject === "영어";
+  const resources = activity.resources.filter((r) => r.label.startsWith(isEnglish ? "영어" : "도덕"));
+  const description = isEnglish ? activity.process.find((s) => s.startsWith("영어:")) : activity.process.find((s) => s.startsWith("도덕:"));
+  return `<div class="detail-track-head"><span>${isEnglish ? "ENGLISH · AI REFLECTION" : "ETHICS · DIGITAL CITIZENSHIP"}</span><h4>${isEnglish ? "영어 — AI 포스터 만들기" : "도덕 — 가상공간과 에티켓"}</h4><p>${description || ""}</p></div>
+    <h5 class="detail-subheading">학생 활동과 결과물</h5>
+    <p class="detail-link-note">현재는 외부 자료를 통해 수업 기록을 공유합니다. 아래 링크에서 해당 학급의 탐구 결과를 살펴볼 수 있습니다.</p>
+    <div class="dialog-resources detail-track-link-grid">${resources.map((r) => `<a href="${r.url}" target="_blank" rel="noopener noreferrer">${r.label}<span>↗</span></a>`).join("")}</div>`;
+}
+function renderSTEMScience(activity) {
+  return `<div class="detail-track-head"><span>SCIENCE · QUESTION & EVIDENCE</span><h4>과학 — 자연과 일상에서 발견하는 탐구 질문</h4><p>자연과 일상 현상을 관찰하고, 그 원인과 조건에 관한 질문을 근거를 통해 설명하는 과학과 질문탐구 활동을 소개합니다.</p></div>
+    <h5 class="detail-subheading">과학 질문탐구 과정</h5><ol class="detail-simple-steps"><li>${activity.process.find((p) => p.startsWith("과학:")) || "현상을 관찰하고 질문을 만들며 근거를 수집해 설명하기"}</li></ol>
+    <p class="detail-link-note">과학과는 요청에 따라 별도 사진 없이 활동 설명만 수록했습니다.</p>`;
+}
+function getActivityDetailTabs(activity) {
+  // 목록에 나타나는 순서와 선택 후 표시할 내용이 이 한 곳에서 관리됩니다.
+  if (activity.programs?.length) return activity.programs.map((p,i) => ({ id:`trip-${i}`, label:p.title.replace("여름방학 ", "").replace("1학년 ", "").replace("2학년 ", ""), render:() => renderQuestProgram(p,i,activity.resources?.find((r) => r.label.includes(p.title))) }));
+  if (activity.id === "na-moment") return activity.highlights.map((h,i) => ({ id:`na-${i}`, label:h.title, render:() => renderNAMoment(activity,i) }));
+  if (activity.mq) return [
+    { id:"mq-guide", label:"참여 방법", render:() => renderMQGuide(activity) },
+    { id:"mq-criteria", label:"선정 기준", render:() => renderMQCriteria(activity) },
+    { id:"mq-archive", label:"월별 질문·답변", render:() => renderMQArchive(activity) }
+  ];
+  if (activity.inquiry?.tracks?.length) return activity.inquiry.tracks.map((t) => ({ id:t.id, label:t.label, render:() => renderInquiryTrack(t) }));
+  if (activity.humanitiesLessons?.tracks?.length) return [
+    ...activity.humanitiesLessons.tracks.slice().sort((a,b) => (a.id === "reading" ? -1 : b.id === "reading" ? 1 : 0)).map((t) => ({ id:t.id, label:t.id === "social" ? "사회" : t.id === "reading" ? "국어" : t.label, render:() => renderHumanitiesTrack(t) })),
+    { id:"english", label:"영어", render:() => renderHumanitiesLinkTrack(activity,"영어") },
+    { id:"ethics", label:"도덕", render:() => renderHumanitiesLinkTrack(activity,"도덕") }
+  ];
+  if (activity.mathLesson) return [
+    { id:"math", label:"수학", render:() => renderStandardExtras({ mathLesson:activity.mathLesson }) },
+    { id:"science", label:"과학", render:() => renderSTEMScience(activity) }
+  ];
+  if (activity.makerLessons?.tracks?.length) return activity.makerLessons.tracks.map((t) => ({ id:t.id, label:t.label, render:() => renderMakerTrack(t) }));
+  return [];
+}
+function renderDetailTabGroup(activity, detailTabs) {
+  if (!detailTabs.length) return "";
+  return `<section class="dialog-section detail-tabs-section" data-detail-activity="${activity.id}">
+    <div class="detail-section-header"><span>EXPLORE THE ACTIVITIES</span><h3>세부 활동 살펴보기</h3><p>항목을 선택하면 해당 활동의 질문과 탐구 과정, 사진·결과물만 표시됩니다.</p></div>
+    <div class="detail-tabs" role="tablist" aria-label="${activity.title} 세부 활동 선택">
+      ${detailTabs.map((t,i) => `<button id="detail-tab-${activity.id}-${i}" type="button" role="tab" data-detail-tab="${t.id}" aria-selected="${i === 0}" aria-controls="detail-panel-${activity.id}" tabindex="${i === 0 ? 0 : -1}">${t.label}</button>`).join("")}
+    </div>
+    <div class="detail-panel" id="detail-panel-${activity.id}" role="tabpanel" aria-labelledby="detail-tab-${activity.id}-0" aria-live="polite">${detailTabs[0].render()}</div>
+  </section>`;
+}
+function openActivity(activityId) {
+  const activity = activities.find((item) => item.id === activityId);
+  if (!activity) return;
+  const category = categories.find((item) => item.id === activity.category);
+  const detailTabs = getActivityDetailTabs(activity);
+  const multi = detailTabs.length > 1;
+  const commonProcess = activity.process?.length ? (multi
+    ? `<details class="detail-overview-more"><summary>전체 활동 과정 펼쳐 보기</summary>${renderActivityProcess(activity)}</details>`
+    : `<section class="dialog-section detail-process-section"><h3>탐구 및 활동 과정</h3>${renderActivityProcess(activity)}</section>`) : "";
+  const genericHighlights = (multi && activity.id === "na-moment") ? "" : renderActivityHighlight(activity);
+  const singleImages = !multi && activity.images?.length ? `<section class="dialog-section detail-images-section"><h3>사진과 결과물</h3>${renderActivityImages(activity.images,activity.title)}</section>` : "";
+  const bottomResources = multi && ["quest-trip","na-moment","humanities-inquiry","maker-inquiry"].includes(activity.id) ? "" : renderActivityResources(activity.resources);
   dialog.className = `activity-dialog ${category?.color || "blue"}`;
   dialogContent.innerHTML = `
     <header class="dialog-header">
@@ -423,29 +451,20 @@ function openActivity(activityId) {
       <h2 id="dialog-title">${activity.title}</h2>
       <p>${activity.subtitle}</p>
     </header>
-    <section class="dialog-section">
-      <h3>활동 소개</h3>
+    <section class="dialog-section detail-intro-section">
+      <h3>활동 전체 소개</h3>
       <p class="dialog-introduction">${activity.introduction}</p>
       ${activity.schedule ? `<p class="dialog-schedule">${activity.schedule}</p>` : ""}
+      ${multi ? commonProcess : ""}
     </section>
-    <section class="dialog-section">
-      <h3>주요 과정</h3>
-      <ol class="process-list">${activity.process.map((step, index) => `<li><b>${String(index + 1).padStart(2, "0")}</b><span>${step}</span></li>`).join("")}</ol>
-    </section>
-    ${highlightSection}
-    ${flowSection}
-    ${comparisonSection}
-    ${mathSection}
-    ${humanitiesSection}
-    ${makerSection}
-    ${programSection}
-    ${inquirySection}
-    ${mqSection}
-    <section class="outcome-box">
-      <span>${activity.outcomeLabel || "성과 또는 변화"}</span>
+    ${multi ? renderDetailTabGroup(activity,detailTabs) : `${commonProcess}${renderStandardExtras(activity)}`}
+    ${genericHighlights}
+    ${singleImages}
+    <section class="outcome-box detail-common-outcome">
+      <span>${activity.outcomeLabel || "활동의 의미 및 변화"}</span>
       <p>${activity.outcome}</p>
     </section>
-    ${imageSection}${mqArchiveSection}${resourceSection}
+    ${bottomResources}
   `;
   showDialogFromTop();
 }
@@ -489,74 +508,89 @@ function openNaskinModel(modelId) {
   showDialogFromTop();
 }
 
+const lightbox = document.querySelector("#archive-image-lightbox");
+let lightboxImages = [];
+let lightboxIndex = 0;
+function setLightboxIndex(index) {
+  if (!lightboxImages.length) return;
+  lightboxIndex = Math.max(0, Math.min(lightboxImages.length - 1, index));
+  const selected = lightboxImages[lightboxIndex];
+  const preview = lightbox.querySelector("img");
+  preview.src = selected.src;
+  preview.alt = selected.alt;
+  lightbox.querySelector("figcaption").textContent = selected.alt;
+  lightbox.querySelector(".lightbox-count").textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
+  lightbox.querySelector(".lightbox-prev").disabled = lightboxIndex === 0;
+  lightbox.querySelector(".lightbox-next").disabled = lightboxIndex === lightboxImages.length - 1;
+}
+function showImageLightbox(link) {
+  // 동일한 사진 갤러리 안에서 공통 이전/다음 동작을 제공합니다.
+  const group = link.closest(".dialog-gallery, .inquiry-gallery, .inquiry-report-pages, .humanities-gallery, .humanities-work-viewer, .math-worksheet-gallery, .maker-gallery, .mq-guide-grid, .mq-month-posters") || dialogContent;
+  const links = [...group.querySelectorAll('a[href]')].filter((a) => /\.(?:png|webp|jpe?g)(?:[?#].*)?$/i.test(a.getAttribute("href") || ""));
+  lightboxImages = links.map((a) => ({ src:a.getAttribute("href"), alt:a.querySelector("img")?.alt || "활동 사진" }));
+  if (!lightboxImages.length) lightboxImages = [{src:link.getAttribute("href"),alt:link.querySelector("img")?.alt || "활동 사진"}];
+  const selected = lightboxImages.findIndex((item) => item.src === link.getAttribute("href"));
+  setLightboxIndex(Math.max(0,selected));
+  if (!lightbox.open) lightbox.showModal();
+}
+lightbox.querySelector(".lightbox-prev").addEventListener("click", () => setLightboxIndex(lightboxIndex - 1));
+lightbox.querySelector(".lightbox-next").addEventListener("click", () => setLightboxIndex(lightboxIndex + 1));
+lightbox.querySelector(".lightbox-close").addEventListener("click", () => lightbox.close());
+lightbox.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+    event.preventDefault();
+    setLightboxIndex(lightboxIndex + (event.key === "ArrowRight" ? 1 : -1));
+  }
+});
+lightbox.addEventListener("click", (event) => { if (event.target === lightbox) lightbox.close(); });
+lightbox.addEventListener("close", () => { lightbox.querySelector("img").removeAttribute("src"); lightboxImages = []; });
+
 document.addEventListener("click", (event) => {
-  const humanitiesTab = event.target.closest("[data-humanities-track]");
-  if (humanitiesTab) {
-    const section=humanitiesTab.closest(".humanities-lesson-section");
-    const activity=activities.find((item)=>item.id==="humanities-inquiry");
-    const track=activity?.humanitiesLessons?.tracks?.find((item)=>item.id===humanitiesTab.dataset.humanitiesTrack);
-    if (section && track) {
-      section.querySelectorAll("[data-humanities-track]").forEach((button)=>{
-        const selected=button===humanitiesTab;
-        button.setAttribute("aria-selected",String(selected));
-        button.tabIndex=selected?0:-1;
+  // 상세창 내 사진은 동일한 확대 화면으로 표시합니다. 외부 링크는 그대로 엽니다.
+  const imageLink = event.target.closest('#dialog-content a[href]');
+  if (imageLink && /\.(?:png|webp|jpe?g)(?:[?#].*)?$/i.test(imageLink.getAttribute("href") || "")) {
+    event.preventDefault();
+    showImageLightbox(imageLink);
+    return;
+  }
+  const commonTab = event.target.closest("[data-detail-tab]");
+  if (commonTab) {
+    const section = commonTab.closest(".detail-tabs-section");
+    const activity = activities.find((a) => a.id === section?.dataset.detailActivity);
+    const selected = getActivityDetailTabs(activity || {}).find((t) => t.id === commonTab.dataset.detailTab);
+    if (section && selected) {
+      section.querySelectorAll("[data-detail-tab]").forEach((button) => {
+        const active = button === commonTab;
+        button.setAttribute("aria-selected", String(active));
+        button.tabIndex = active ? 0 : -1;
       });
-      section.querySelector(".humanities-track-panel").innerHTML=renderHumanitiesTrack(track);
+      const panel = section.querySelector(".detail-panel");
+      panel.innerHTML = selected.render();
+      panel.setAttribute("aria-labelledby", commonTab.id);
     }
     return;
   }
   const workNav=event.target.closest("[data-humanities-work-nav]");
   if (workNav) {
-    const section=workNav.closest(".humanities-lesson-section");
-    const selectedTab=section?.querySelector('[data-humanities-track][aria-selected="true"]');
+    const section=workNav.closest(".detail-tabs-section");
+    const selectedTab=section?.querySelector('[data-detail-tab][aria-selected="true"]');
     const activity=activities.find((item)=>item.id==="humanities-inquiry");
-    const track=activity?.humanitiesLessons?.tracks?.find((item)=>item.id===selectedTab?.dataset.humanitiesTrack);
+    const track=activity?.humanitiesLessons?.tracks?.find((item)=>item.id===selectedTab?.dataset.detailTab);
     const viewer=section?.querySelector(".humanities-work-viewer");
     if (track?.works?.length && viewer) {
       const current=Number(viewer.dataset.workIndex||0);
-      const offset=workNav.dataset.humanitiesWorkNav==="next"?1:-1;
-      const next=Math.max(0,Math.min(track.works.length-1,current+offset));
+      const next=Math.max(0,Math.min(track.works.length-1,current+(workNav.dataset.humanitiesWorkNav==="next"?1:-1)));
       viewer.dataset.workIndex=String(next);
       viewer.innerHTML=renderHumanitiesWork(track,next);
     }
     return;
   }
-  const makerTab = event.target.closest("[data-maker-track]");
-  if (makerTab) {
-    const section = makerTab.closest(".maker-lesson-section");
-    const activity = activities.find((item) => item.id === "maker-inquiry");
-    const track = activity?.makerLessons?.tracks?.find((item) => item.id === makerTab.dataset.makerTrack);
-    if (section && track) {
-      section.querySelectorAll("[data-maker-track]").forEach((button) => {
-        const selected = button === makerTab;
-        button.setAttribute("aria-selected", String(selected));
-        button.tabIndex = selected ? 0 : -1;
-      });
-      section.querySelector(".maker-track-panel").innerHTML = renderMakerTrack(track);
-    }
-    return;
-  }
-  const inquiryTab = event.target.closest("[data-inquiry-track]");
-  if (inquiryTab) {
-    const contest = activities.find((item) => item.id === "inquiry-contest");
-    const track = contest?.inquiry?.tracks?.find((item) => item.id === inquiryTab.dataset.inquiryTrack);
-    const section = inquiryTab.closest(".inquiry-contest-section");
-    if (track && section) {
-      section.querySelectorAll("[data-inquiry-track]").forEach((tab) => {
-        const active = tab === inquiryTab;
-        tab.setAttribute("aria-selected", String(active));
-        tab.tabIndex = active ? 0 : -1;
-      });
-      section.querySelector(".inquiry-track-panel").innerHTML = renderInquiryTrack(track);
-    }
-    return;
-  }
   const reportNav = event.target.closest("[data-inquiry-report-nav]");
   if (reportNav) {
-    const section = reportNav.closest(".inquiry-contest-section");
+    const section = reportNav.closest(".detail-tabs-section");
+    const selected = section?.querySelector('[data-detail-tab][aria-selected="true"]');
     const contest = activities.find((item) => item.id === "inquiry-contest");
-    const selected = section?.querySelector('[data-inquiry-track][aria-selected="true"]');
-    const track = contest?.inquiry?.tracks?.find((item) => item.id === selected?.dataset.inquiryTrack);
+    const track = contest?.inquiry?.tracks?.find((item) => item.id === selected?.dataset.detailTab);
     const viewer = section?.querySelector(".inquiry-report-viewer");
     if (track?.reports && viewer) {
       const current = Number(viewer.dataset.reportIndex || 0);
@@ -566,7 +600,6 @@ document.addEventListener("click", (event) => {
     }
     return;
   }
-
   const mqMonthTab = event.target.closest("[data-mq-month]");
   if (mqMonthTab) {
     const monthSection = mqMonthTab.closest(".mq-month-section");
@@ -575,9 +608,9 @@ document.addEventListener("click", (event) => {
     const selectedMonth = mqActivity?.mq?.months?.[monthIndex];
     if (monthSection && selectedMonth) {
       monthSection.querySelectorAll("[data-mq-month]").forEach((tab) => {
-        const selected = tab === mqMonthTab;
-        tab.setAttribute("aria-selected", String(selected));
-        tab.tabIndex = selected ? 0 : -1;
+        const active = tab === mqMonthTab;
+        tab.setAttribute("aria-selected", String(active));
+        tab.tabIndex = active ? 0 : -1;
       });
       monthSection.querySelector(".mq-month-panel").innerHTML = renderMQMonth(selectedMonth);
     }
@@ -601,6 +634,18 @@ document.addEventListener("click", (event) => {
   }
   const activityButton = event.target.closest("[data-open-activity]");
   if (activityButton) openActivity(activityButton.dataset.openActivity);
+});
+
+dialog.addEventListener("keydown", (event) => {
+  const active = document.activeElement;
+  if (!active?.matches?.("[data-detail-tab]") || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+  const buttons = [...active.closest(".detail-tabs")?.querySelectorAll("[data-detail-tab]") || []];
+  if (!buttons.length) return;
+  event.preventDefault();
+  const current = buttons.indexOf(active);
+  const index = event.key === "Home" ? 0 : event.key === "End" ? buttons.length - 1 : (current + (event.key === "ArrowRight" ? 1 : -1) + buttons.length) % buttons.length;
+  buttons[index].focus();
+  buttons[index].click();
 });
 
 tabs.addEventListener("keydown", (event) => {
