@@ -1,4 +1,15 @@
-SUCCESS: 18 card renders, 7 multitab sets, full text and resource checks
+SUCCESS: 18 card renders, 9 multitab sets, full text and resource checks
+SUCCESS: teacher photo galleries — training 6, study group 4, information sharing 4
+SUCCESS: embedded teaching-plan PDFs — open class 13 pages, all-subject training result 29 pages
+SUCCESS: 18 activities across 4 collections — school 6, student 4, class 5, teacher 3
+SUCCESS: 114 local data references and 24 resource URLs checked — 0 missing or invalid
+SUCCESS: public-class overview exposes Canva and PDF; teacher training exposes all-subject PDF
+SUCCESS: all JavaScript data/app files passed syntax checks; embedded MP4 passed ffprobe
+SUCCESS: local web-server smoke test — index and both PDFs returned HTTP 200 with correct MIME types
+SUCCESS: responsive viewport and mobile breakpoints present; resource buttons use a wrapping single-column grid
+SUCCESS: teacher research timeline — QUEST, QBL/D-QBL, N-ASKIN, four informatics models
+SUCCESS: teacher-study-group exposes 4 research tabs, 4 field photos, and 8 stage-specific resources
+SUCCESS: teacher research renderer — all 4 tabs include research question, application record, turning point, photo, and links
 [
   [
     "question-wings",
@@ -88,7 +99,11 @@ SUCCESS: 18 card renders, 7 multitab sets, full text and resource checks
   ],
   [
     "open-class",
-    []
+    [
+      "수업 개요",
+      "4개 미션",
+      "N-ASKIN 흐름"
+    ]
   ],
   [
     "teacher-training",
@@ -100,6 +115,10 @@ SUCCESS: 18 card renders, 7 multitab sets, full text and resource checks
   ],
   [
     "regional-sharing",
-    []
+    [
+      "상주여고",
+      "정보교과 수업 나눔",
+      "왜관중학교"
+    ]
   ]
 ]

@@ -1047,3 +1047,59 @@ footer { color: #78a5c8; background: #06376c; }
 .lightbox-controls button { border: 1px solid #d4e3f0; padding: 9px 16px; border-radius: 10px; color: #24638f; background: #f1f8ff; font-size: 12px; font-weight: 800; cursor: pointer; }
 .lightbox-controls button:disabled { color: #a8b7c5; background: #f6f7f9; cursor: not-allowed; }
 .lightbox-controls span { min-width: 46px; color: #56718a; text-align: center; font-size: 12px; font-weight: 700; }
+
+/* v3.6: 지역 연수·수업 나눔 및 정보과 공개수업 상세 기록 */
+.teacher-program-head { background: linear-gradient(145deg,#fff8ef,#fff); border-color:#f1dfc6; }
+.teacher-program-head > span { color:#c27a24; }
+.teacher-program-head h4 { color:#86531f; }
+.teacher-program-meta { display:flex; align-items:center; gap:12px; padding:13px 16px; border-radius:12px; background:#fffaf3; border:1px solid #f0e3cf; color:#725b43; font-size:12px; }
+.teacher-program-meta b { flex:0 0 auto; color:#a86622; }
+.teacher-driving-question { margin:14px 0 0; border-left-color:#d18a34; background:#fff4e4; }
+.teacher-driving-question b { color:#ad671e; }
+.teacher-driving-question p { color:#744b25; }
+.teacher-program-steps li::marker { color:#c07b2b; font-weight:900; }
+.teacher-program-meaning { background:#fffaf4; border-color:#f1e3d0; }
+.teacher-program-meaning b { color:#a56726; }
+.teacher-program-meaning p { color:#6f6253; }
+
+.research-stage-head { background:linear-gradient(145deg,#f4f8ff,#fff); border-color:#d8e4f3; }
+.research-stage-head > span { color:#4b79aa; }
+.research-stage-head h4 { color:#315e8c; }
+.research-stage-period { border-color:#dce8f4; background:#f6faff; color:#506c88; }
+.research-stage-period b { color:#39709f; }
+.research-evolution-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:9px; }
+.research-evolution-grid article { min-width:0; padding:16px 14px; border:1px solid #dde5f2; border-radius:15px; background:linear-gradient(150deg,#f7f9ff,#fff); }
+.research-evolution-grid span { display:block; margin-bottom:8px; color:#7d6ead; font-size:9px; font-weight:900; letter-spacing:.06em; }
+.research-evolution-grid b { display:block; margin-bottom:7px; color:#3c5686; font-size:14px; line-height:1.4; }
+.research-evolution-grid p { margin:0; color:#64758b; font-size:11px; line-height:1.65; }
+.research-driving-question { margin:15px 0 0; border-left-color:#4a82b7; background:#edf6ff; }
+.research-driving-question b { color:#28699f; }
+.research-driving-question p { color:#315d81; }
+.research-stage-actions li::marker { color:#3976a9; font-weight:900; }
+.research-turning-point { margin-top:20px; padding:17px 18px; border:1px solid #d8e7dc; border-radius:15px; background:#f4fbf5; }
+.research-turning-point b { display:block; margin-bottom:6px; color:#367448; font-size:12px; }
+.research-turning-point p { margin:0; color:#536e5b; font-size:12px; line-height:1.8; }
+
+.open-class-head { background:linear-gradient(145deg,#f6f3ff,#fff); border-color:#ddd5f2; }
+.open-class-head > span { color:#7656b5; }
+.open-class-head h4 { color:#55428d; }
+.open-class-question { margin:14px 0 0; border-left-color:#7459bd; background:#f0ecff; }
+.open-class-question b { color:#674aa7; }
+.open-class-question p { color:#493c78; }
+.open-class-role-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.open-class-mission-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.open-class-mission-grid article { position:relative; min-width:0; padding:20px 18px 18px; border:1px solid #e1dbf1; border-radius:16px; background:linear-gradient(145deg,#fbf9ff,#fff); }
+.open-class-mission-grid article > span { display:grid; place-items:center; width:34px; height:34px; margin-bottom:12px; border-radius:11px; background:linear-gradient(135deg,#6855ac,#9a69c7); color:#fff; font-size:11px; font-weight:900; }
+.open-class-mission-grid h5 { margin:0 0 8px; color:#574684; font-size:14px; line-height:1.55; }
+.open-class-mission-grid p { margin:0; color:#64728a; font-size:12px; line-height:1.75; }
+.open-class-flow .maker-step { border-color:#e3dff1; background:#fcfbff; }
+.open-class-flow .maker-step-identifier b { background:linear-gradient(135deg,#6651ad,#986bc6); }
+.open-class-flow .maker-step h6 { color:#5d4b90; }
+@media(max-width:620px) {
+  .teacher-program-meta { align-items:flex-start; flex-direction:column; gap:4px; }
+  .research-evolution-grid { grid-template-columns:1fr 1fr; }
+  .open-class-role-grid,.open-class-mission-grid { grid-template-columns:1fr; }
+}
+@media(max-width:420px) {
+  .research-evolution-grid { grid-template-columns:1fr; }
+}

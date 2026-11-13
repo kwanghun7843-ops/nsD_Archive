@@ -400,6 +400,89 @@ function renderSTEMScience(activity) {
     <h5 class="detail-subheading">과학 질문탐구 과정</h5><ol class="detail-simple-steps"><li>${activity.process.find((p) => p.startsWith("과학:")) || "현상을 관찰하고 질문을 만들며 근거를 수집해 설명하기"}</li></ol>
     <p class="detail-link-note">과학과는 요청에 따라 별도 사진 없이 활동 설명만 수록했습니다.</p>`;
 }
+
+// 함께 성장하는 교사: 지역별 연수·수업 나눔 기록
+function renderTeacherProgram(program) {
+  return `<div class="detail-track-head teacher-program-head">
+      <span>${program.eyebrow}</span>
+      <h4>${program.title}</h4>
+      <p>${program.summary}</p>
+    </div>
+    <div class="teacher-program-meta"><b>참여 대상</b><span>${program.audience}</span></div>
+    <blockquote class="maker-driving-question teacher-driving-question"><b>연수의 핵심 질문</b><p>“${program.question}”</p></blockquote>
+    <h5 class="detail-subheading">연수·나눔의 흐름</h5>
+    <ol class="detail-simple-steps teacher-program-steps">${program.activities.map((item) => `<li>${item}</li>`).join("")}</ol>
+    <div class="humanities-meaning teacher-program-meaning"><b>활동의 의미</b><p>${program.meaning}</p></div>
+    ${program.images?.length ? `<h5 class="detail-subheading">연수 현장</h5>${renderActivityImages(program.images, program.title)}` : ""}
+    <div class="detail-track-resources"><a href="${program.resource.url}" target="_blank" rel="noopener noreferrer">${program.resource.label} <span aria-hidden="true">↗</span></a></div>`;
+}
+
+// 함께 성장하는 교사: QUEST에서 N-ASKIN과 정보교과 4모델로 이어진 연구 과정
+function renderTeacherResearchStage(activity, stage, index) {
+  const research = activity.teacherResearch;
+  const image = activity.images?.[stage.imageIndex];
+  const evolution = index === 0 ? `
+    <h5 class="detail-subheading">질문탐구 수업 모델의 발전 흐름</h5>
+    <div class="research-evolution-grid">
+      ${research.evolution.map((item, itemIndex) => `<article>
+        <span>${String(itemIndex + 1).padStart(2, "0")} · ${item.period}</span>
+        <b>${item.name}</b>
+        <p>${item.body}</p>
+      </article>`).join("")}
+    </div>` : "";
+  return `<div class="detail-track-head research-stage-head">
+      <span>${stage.eyebrow}</span>
+      <h4>${stage.title}</h4>
+      <p>${stage.summary}</p>
+    </div>
+    <div class="teacher-program-meta research-stage-period"><b>연구 시기</b><span>${stage.period}</span></div>
+    ${evolution}
+    <blockquote class="maker-driving-question research-driving-question"><b>이 단계의 연구 질문</b><p>“${stage.question}”</p></blockquote>
+    <h5 class="detail-subheading">연구와 수업 적용</h5>
+    <ol class="detail-simple-steps research-stage-actions">${stage.actions.map((item) => `<li>${item}</li>`).join("")}</ol>
+    <div class="research-turning-point"><b>다음 단계로 이끈 발견</b><p>${stage.turningPoint}</p></div>
+    ${image ? `<h5 class="detail-subheading">공동 연구 현장</h5>${renderActivityImages([image], stage.title)}` : ""}
+    ${stage.resources?.length ? `<div class="detail-track-resources">${stage.resources.map((resource) => `<a href="${resource.url}" target="_blank" rel="noopener noreferrer">${resource.label} <span aria-hidden="true">↗</span></a>`).join("")}</div>` : ""}`;
+}
+
+// 2026. 11. 12. 정보과 공개수업: 개요·미션·디버깅형 N-ASKIN
+function renderOpenClassOverview(activity) {
+  const overview = activity.openClassDetails.overview;
+  return `<div class="detail-track-head open-class-head">
+      <span>OPEN CLASS · 2026. 11. 12.</span>
+      <h4>협력적 앱 개발 × 디버깅형 N-ASKIN</h4>
+      <p>카페 키오스크 앱의 오류를 실험으로 재현하고, 질문과 근거를 연결해 수정·재검증하는 45분 수업입니다.</p>
+    </div>
+    <blockquote class="maker-driving-question open-class-question"><b>핵심 탐구 질문</b><p>“${overview.question}”</p></blockquote>
+    <h5 class="detail-subheading">학습 목표</h5>
+    <ol class="detail-simple-steps open-class-goals">${overview.goals.map((goal) => `<li>${goal}</li>`).join("")}</ol>
+    <h5 class="detail-subheading">2인 1조 · 태블릿 2대 역할</h5>
+    <div class="activity-highlight-grid open-class-role-grid">${overview.roles.map((role) => `<article><b>${role.title}</b><p>${role.body}</p></article>`).join("")}</div>
+    <div class="detail-track-resources">${overview.resources.map((resource) => `<a href="${resource.url}" target="_blank" rel="noopener noreferrer">${resource.label} <span aria-hidden="true">↗</span></a>`).join("")}</div>`;
+}
+function renderOpenClassMissions(activity) {
+  const missions = activity.openClassDetails.missions;
+  return `<div class="detail-track-head open-class-head">
+      <span>12 GROUPS · 4 DEBUGGING MISSIONS</span>
+      <h4>네 가지 오류를 세 조씩 비교 탐구</h4>
+      <p>각 미션을 세 조가 맡아 서로 다른 실행 기록과 원인 판단을 비교할 수 있도록 구성했습니다.</p>
+    </div>
+    <div class="open-class-mission-grid">${missions.map((mission) => `<article>
+      <span>${mission.number}</span><h5>${mission.title}</h5><p>${mission.focus}</p>
+    </article>`).join("")}</div>`;
+}
+function renderOpenClassFlow(activity) {
+  const steps = activity.openClassDetails.steps;
+  return `<div class="detail-track-head open-class-head">
+      <span>DEBUGGING N-ASKIN · 6 STEPS</span>
+      <h4>관찰에서 재검증까지 이어지는 탐구 흐름</h4>
+      <p>실행 결과를 바로 해석하거나 코드를 먼저 고치지 않고, 사실 기록과 조건 통제, 근거 연결을 거쳐 수정의 타당성을 확인합니다.</p>
+    </div>
+    <div class="maker-steps open-class-flow">${steps.map((step, index) => `<article class="maker-step">
+      <div class="maker-step-identifier"><span>${String(index + 1).padStart(2, "0")}</span><b>${step.code}</b></div>
+      <div><h6>${step.name}</h6><p>${step.detail}</p></div>
+    </article>`).join("")}</div>`;
+}
 function getActivityDetailTabs(activity) {
   // 목록에 나타나는 순서와 선택 후 표시할 내용이 이 한 곳에서 관리됩니다.
   if (activity.programs?.length) return activity.programs.map((p,i) => ({ id:`trip-${i}`, label:p.title.replace("여름방학 ", "").replace("1학년 ", "").replace("2학년 ", ""), render:() => renderQuestProgram(p,i,activity.resources?.find((r) => r.label.includes(p.title))) }));
@@ -420,6 +503,13 @@ function getActivityDetailTabs(activity) {
     { id:"science", label:"과학", render:() => renderSTEMScience(activity) }
   ];
   if (activity.makerLessons?.tracks?.length) return activity.makerLessons.tracks.map((t) => ({ id:t.id, label:t.label, render:() => renderMakerTrack(t) }));
+  if (activity.teacherResearch?.stages?.length) return activity.teacherResearch.stages.map((stage, index) => ({ id:stage.id, label:stage.label, render:() => renderTeacherResearchStage(activity, stage, index) }));
+  if (activity.teacherPrograms?.length) return activity.teacherPrograms.map((program) => ({ id:program.id, label:program.label, render:() => renderTeacherProgram(program) }));
+  if (activity.openClassDetails) return [
+    { id:"open-overview", label:"수업 개요", render:() => renderOpenClassOverview(activity) },
+    { id:"open-missions", label:"4개 미션", render:() => renderOpenClassMissions(activity) },
+    { id:"open-flow", label:"N-ASKIN 흐름", render:() => renderOpenClassFlow(activity) }
+  ];
   return [];
 }
 function renderDetailTabGroup(activity, detailTabs) {
@@ -443,7 +533,7 @@ function openActivity(activityId) {
     : `<section class="dialog-section detail-process-section"><h3>탐구 및 활동 과정</h3>${renderActivityProcess(activity)}</section>`) : "";
   const genericHighlights = (multi && activity.id === "na-moment") ? "" : renderActivityHighlight(activity);
   const singleImages = !multi && activity.images?.length ? `<section class="dialog-section detail-images-section"><h3>사진과 결과물</h3>${renderActivityImages(activity.images,activity.title)}</section>` : "";
-  const bottomResources = multi && ["quest-trip","na-moment","humanities-inquiry","maker-inquiry"].includes(activity.id) ? "" : renderActivityResources(activity.resources);
+  const bottomResources = multi && ["quest-trip","na-moment","humanities-inquiry","maker-inquiry","teacher-study-group","regional-sharing","open-class"].includes(activity.id) ? "" : renderActivityResources(activity.resources);
   dialog.className = `activity-dialog ${category?.color || "blue"}`;
   dialogContent.innerHTML = `
     <header class="dialog-header">
