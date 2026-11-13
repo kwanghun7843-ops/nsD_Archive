@@ -57,12 +57,12 @@ window.archiveActivities.push(...[
     "category": "teacher",
     "title": "질문탐구 교사 연구모임",
     "subtitle": "QUEST에서 N-ASKIN으로, 함께 검증하며 남산형 수업 모델을 세우다!",
-    "introduction": "2026년 1월, QUEST 모델을 활용한 교사용 수업 설계 도우미 제작에서 연구를 시작했습니다. 이후 실제 수업과 교사 협의를 통해 범용 QBL과 디버깅 중심 D-QBL을 구분하고, 4월에는 전 교과와 학교생활을 관통하는 남산중학교 고유의 N-ASKIN 모델로 재정립했습니다. 13명의 교사가 교과별 수업을 공동 설계·적용·성찰했으며, 수업 과제의 성격에 따라 범용형·디버깅형·분석·판단형·프로젝트형의 네 가지 적용 모델로 고도화했습니다.",
+    "introduction": "2026년 1월, QUEST 모델을 활용한 교사용 수업 설계 도우미 제작에서 연구를 시작했습니다. 이후 실제 수업과 교사 협의를 통해 범용 QBL과 디버깅 중심 D-QBL을 구분하고, 4월에는 전 교과와 학교생활을 관통하는 남산중학교 고유의 N-ASKIN 모델로 재정립했습니다. 13명의 교사가 교과별 수업을 공동 설계·적용·성찰했으며, 수업 과제의 성격에 따라 범용형·디버깅형·분석·판단형·프로젝트형의 네 가지 유형으로 발전시켰습니다.",
     "process": [
       "1~4월: QUEST 기반 수업 설계와 QBL·D-QBL 현장 적용을 통해 질문 생성, 탐구, 산출과 평가의 연결 가능성 점검",
       "4~5월: 발견–질문–탐구–연결–구현–확장의 순환 구조를 N-ASKIN으로 재정렬하고 전 교과 공통 언어 확립",
       "7~10월: 핵심 질문–출발 질문–학생 질문–도착 질문의 지도안 구조를 표준화하고 교과별 수업 공동 설계",
-      "10~11월: AI와 에듀테크의 역할을 질문 코칭과 근거 기록으로 재설계하고 과제 유형별 N-ASKIN 4모델로 고도화"
+      "10~11월: AI와 에듀테크의 역할을 질문 코칭과 근거 기록으로 재설계하고 과제 유형별 N-ASKIN 4개 유형으로 정리"
     ],
     "teacherResearch": {
       "evolution": [
@@ -82,7 +82,7 @@ window.archiveActivities.push(...[
           "body": "전 교과와 학교생활을 관통하는 발견–질문–탐구–연결–구현–확장의 순환 모델"
         },
         {
-          "name": "N-ASKIN 4모델",
+          "name": "N-ASKIN 4개 유형",
           "period": "10~11월",
           "body": "범용형·디버깅형·분석·판단형·프로젝트형으로 전 교과에 적용 가능한 탐구 경로 고도화"
         }
@@ -103,17 +103,7 @@ window.archiveActivities.push(...[
             "1학년 ‘슬기로운 디지털 생활’ 5개 소단원과 네 가지 수행평가에 적용하여 현장 적합성 확인"
           ],
           "turningPoint": "QUEST는 질문 중심 수업의 절차를 설계하는 유용한 출발점이었지만, 전 교과와 학교 일상까지 함께 설명하고 탐구 이후의 구현·성찰을 다시 다음 질문으로 연결하는 학교 고유의 순환 구조가 필요했습니다.",
-          "imageIndex": 0,
-          "resources": [
-            {
-              "label": "질문하는 학교 선도학교 운영 계획서",
-              "url": "https://drive.google.com/file/d/1lIVihAPzdh_WLmRvNIRopI1SRnxUg2eX/view?usp=drivesdk"
-            },
-            {
-              "label": "QUEST 모델 질문하는 학교 수업 설계 도우미",
-              "url": "https://gemini.google.com/gem/1wpVlbCmNrKWg1i0tPqFmFu4BhPqmO7sz"
-            }
-          ]
+          "resources": []
         },
         {
           "id": "naskin-establish",
@@ -131,17 +121,7 @@ window.archiveActivities.push(...[
             "5월 28일 관리자 대상 공유회에서 N-ASKIN 모델과 학교 특화 프로그램을 지역에 처음 공개"
           ],
           "turningPoint": "교사가 정해 준 질문에 답하는 수업이 아니라 학생이 관찰에서 출발해 질문을 만들고, 탐구 결과를 삶과 산출물로 구현한 뒤 다시 질문하는 순환 구조가 학교의 공통 수업 언어가 되었습니다.",
-          "imageIndex": 1,
-          "resources": [
-            {
-              "label": "슬기로운 디지털 생활 질문탐구 수업 기록",
-              "url": "https://drive.google.com/file/d/1sG0x6sUtyCC9R8aqYLNH376_P_sUcE6Q/view?usp=drivesdk"
-            },
-            {
-              "label": "N-ASKIN 운영 프로그램 공유회 계획",
-              "url": "https://drive.google.com/open?id=1rnZPShy2FoDcKtUAaU-8iKgNbbZiGihK"
-            }
-          ]
+          "resources": []
         },
         {
           "id": "all-subjects",
@@ -159,26 +139,16 @@ window.archiveActivities.push(...[
             "수업 결과를 공동 검토하며 교과별 차이를 모델의 예외가 아닌 확장 가능성으로 정리"
           ],
           "turningPoint": "N-ASKIN의 핵심은 모든 교과를 같은 방식으로 만드는 데 있지 않았습니다. 공통 탐구 흐름 안에서 교과마다 다른 증거, 표현, 검증 방법을 살리는 것이 전 교과 확장의 원칙으로 정립되었습니다.",
-          "imageIndex": 2,
-          "resources": [
-            {
-              "label": "교사 공동 연구 결과 — 전 교과 N-ASKIN 수업지도안 PDF",
-              "url": "assets/documents/all-subject-naskin-teaching-plans.pdf"
-            },
-            {
-              "label": "2026 남산중 질문탐구 수업지도안",
-              "url": "https://drive.google.com/file/d/1em7EH8mBSzGQ497Q6UHk3UATYr530drN/view?usp=drivesdk"
-            }
-          ]
+          "resources": []
         },
         {
-          "id": "four-models-advanced",
-          "label": "4모델 고도화",
+          "id": "four-types",
+          "label": "4개 유형",
           "eyebrow": "OCT–NOV · FOUR N-ASKIN PATHS",
           "period": "2026년 10월~11월",
           "title": "수업 과제에 따라 달라지는 네 가지 N-ASKIN 경로",
           "question": "교과와 과제가 달라도 탐구 목적에 맞는 N-ASKIN 경로를 선택할 수 있을까?",
-          "summary": "초기 생성형 AI와 커스텀 AI 중심 수업에서 답을 그대로 수용하거나 사고 과정을 건너뛰는 문제가 나타났습니다. AI 사용을 잠시 제한하고 Padlet·Canva로 질문과 탐구 과정을 기록한 뒤, AI를 정답 생성기가 아닌 질문 코치로 한정했습니다. 이를 바탕으로 교과가 아니라 수업 과제의 성격과 탐구 목적에 따라 선택할 수 있는 네 가지 N-ASKIN 적용 모델을 확립했습니다.",
+          "summary": "초기 생성형 AI와 커스텀 AI 중심 수업에서 답을 그대로 수용하거나 사고 과정을 건너뛰는 문제가 나타났습니다. AI 사용을 잠시 제한하고 Padlet·Canva로 질문과 탐구 과정을 기록한 뒤, AI를 정답 생성기가 아닌 질문 코치로 한정했습니다. 이를 바탕으로 교과가 아니라 수업 과제의 성격과 탐구 목적에 따라 선택할 수 있는 네 가지 N-ASKIN 유형을 정리했습니다.",
           "actions": [
             "범용형: 수업 자료와 활동에서 자신의 질문에 대한 답과 근거를 찾아 설명",
             "디버깅형: 계산·실험 절차·글·설계 등에서 오류나 불일치를 발견하고 원인을 추적해 수정·재검증",
@@ -187,46 +157,20 @@ window.archiveActivities.push(...[
             "교과별 수업 사례를 비교하여 같은 모델도 교과에 따라 증거 수집과 검증 방법이 달라질 수 있음을 확인",
             "질문탐구 웹앱과 AI 코칭을 활용하되 답 제시가 아닌 질문 정교화와 과정 기록에 역할을 제한"
           ],
-          "turningPoint": "모든 수업을 하나의 절차로 통일하는 대신, 탐구 목적에 따라 네 가지 경로를 선택하도록 모델을 고도화했습니다. 디버깅형은 계산 오류, 실험 절차, 글쓰기와 설계 개선 등 잘못된 결과의 원인을 찾고 수정하는 여러 수업에 적용할 수 있으며, 나머지 모델 역시 교과의 경계를 넘어 활용할 수 있습니다.",
-          "imageIndex": 3,
-          "resources": [
-            {
-              "label": "N-ASKIN 교과 적용 연구 기록",
-              "url": "https://docs.google.com/document/d/1JzNZQT50Gych2HNffaXYxyWo1DLvHp1qaUTQ-sINjgk/edit?usp=drivesdk"
-            },
-            {
-              "label": "N-ASKIN 4모델 적용을 위한 전 교과 수업지도안 PDF",
-              "url": "assets/documents/all-subject-naskin-teaching-plans.pdf"
-            }
-          ]
+          "turningPoint": "모든 수업을 하나의 절차로 통일하는 대신, 탐구 목적에 따라 네 가지 유형을 선택하도록 체계를 발전시켰습니다. 디버깅형은 계산 오류, 실험 절차, 글쓰기와 설계 개선 등 잘못된 결과의 원인을 찾고 수정하는 여러 수업에 적용할 수 있으며, 나머지 유형 역시 교과의 경계를 넘어 활용할 수 있습니다.",
+          "resources": []
         }
       ]
     },
     "outcomeLabel": "연구의 성과",
-    "outcome": "외부 모델인 QUEST를 적용하는 단계에서 출발해, 실제 수업의 실패와 가능성을 교사들이 함께 분석하며 남산중학교 고유의 N-ASKIN을 정립했습니다. 이어 전 교과 공통 지도안과 교과별 실천 사례를 축적하고, 수업 과제의 성격에 따라 선택할 수 있는 네 가지 적용 모델과 질문 코칭 도구로 검증 수준을 높였습니다. 그 결과 질문탐구 수업은 일회성 행사나 특정 도구 활용이 아니라 교육과정–수업–평가–성찰을 연결하는 학교의 공동 수업 체계로 발전했습니다.",
-    "images": [
+    "outcome": "외부 모델인 QUEST를 적용하는 단계에서 출발해, 실제 수업의 실패와 가능성을 교사들이 함께 분석하며 남산중학교 고유의 N-ASKIN을 정립했습니다. 이어 전 교과 공통 지도안과 교과별 실천 사례를 축적하고, 수업 과제의 성격에 따라 선택할 수 있는 네 가지 유형과 질문 코칭 도구로 검증 수준을 높였습니다. 그 결과 질문탐구 수업은 일회성 행사나 특정 도구 활용이 아니라 교육과정–수업–평가–성찰을 연결하는 학교의 공동 수업 체계로 발전했습니다.",
+    "images": [],
+    "resources": [
       {
-        "src": "assets/images/teacher/study-group-01.webp",
-        "alt": "교사들이 질문탐구 수업자료를 함께 살펴보며 협의하는 모습",
-        "caption": "교과별 질문탐구 수업자료를 함께 검토하고 적용 방향 협의"
-      },
-      {
-        "src": "assets/images/teacher/study-group-02.webp",
-        "alt": "교사 연구모임에서 수업 설계 자료를 비교하며 의견을 나누는 모습",
-        "caption": "수업 흐름과 활동 자료를 비교하며 개선할 부분을 공동으로 탐색"
-      },
-      {
-        "src": "assets/images/teacher/study-group-03.webp",
-        "alt": "교사들이 연구자료를 작성하며 질문 중심 수업을 공동 설계하는 모습",
-        "caption": "질문 중심 수업의 단계와 교과별 실천 방안을 기록·공유"
-      },
-      {
-        "src": "assets/images/teacher/study-group-04.webp",
-        "alt": "소그룹 교사들이 질문탐구 수업 적용 방안을 논의하는 모습",
-        "caption": "소그룹 협의를 통해 수업 적용 결과와 다음 개선 방향 구체화"
+        "label": "교사 공동 연구 결과 — 전 교과 N-ASKIN 수업지도안 PDF",
+        "url": "assets/documents/all-subject-naskin-teaching-plans.pdf"
       }
-    ],
-    "resources": []
+    ]
   },
   {
     "id": "regional-sharing",

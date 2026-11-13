@@ -417,7 +417,7 @@ function renderTeacherProgram(program) {
     <div class="detail-track-resources"><a href="${program.resource.url}" target="_blank" rel="noopener noreferrer">${program.resource.label} <span aria-hidden="true">↗</span></a></div>`;
 }
 
-// 함께 성장하는 교사: QUEST에서 N-ASKIN과 범교과 4모델로 이어진 연구 과정
+// 함께 성장하는 교사: QUEST에서 N-ASKIN과 범교과 4개 유형으로 이어진 연구 과정
 function renderTeacherResearchStage(activity, stage, index) {
   const research = activity.teacherResearch;
   const image = activity.images?.[stage.imageIndex];
@@ -533,6 +533,7 @@ function openActivity(activityId) {
     : `<section class="dialog-section detail-process-section"><h3>탐구 및 활동 과정</h3>${renderActivityProcess(activity)}</section>`) : "";
   const genericHighlights = (multi && activity.id === "na-moment") ? "" : renderActivityHighlight(activity);
   const singleImages = !multi && activity.images?.length ? `<section class="dialog-section detail-images-section"><h3>사진과 결과물</h3>${renderActivityImages(activity.images,activity.title)}</section>` : "";
+  const topResources = activity.id === "teacher-study-group" ? renderActivityResources(activity.resources, "교사 공동 연구 결과") : "";
   const bottomResources = multi && ["quest-trip","na-moment","humanities-inquiry","maker-inquiry","teacher-study-group","regional-sharing","open-class"].includes(activity.id) ? "" : renderActivityResources(activity.resources);
   dialog.className = `activity-dialog ${category?.color || "blue"}`;
   dialogContent.innerHTML = `
@@ -547,6 +548,7 @@ function openActivity(activityId) {
       ${activity.schedule ? `<p class="dialog-schedule">${activity.schedule}</p>` : ""}
       ${multi ? commonProcess : ""}
     </section>
+    ${topResources}
     ${multi ? renderDetailTabGroup(activity,detailTabs) : `${commonProcess}${renderStandardExtras(activity)}`}
     ${genericHighlights}
     ${singleImages}
