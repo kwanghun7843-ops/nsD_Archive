@@ -7,7 +7,7 @@ SUCCESS: public-class overview exposes Canva and PDF; teacher training exposes a
 SUCCESS: all JavaScript data/app files passed syntax checks; embedded MP4 passed ffprobe
 SUCCESS: local web-server smoke test — index and both PDFs returned HTTP 200 with correct MIME types
 SUCCESS: responsive viewport and mobile breakpoints present; resource buttons use a wrapping single-column grid
-SUCCESS: teacher research timeline — QUEST, QBL/D-QBL, N-ASKIN, four informatics models
+SUCCESS: teacher research timeline — QUEST, QBL/D-QBL, N-ASKIN, four cross-curricular models
 SUCCESS: teacher-study-group exposes 4 research tabs, 4 field photos, and 8 stage-specific resources
 SUCCESS: teacher research renderer — all 4 tabs include research question, application record, turning point, photo, and links
 [

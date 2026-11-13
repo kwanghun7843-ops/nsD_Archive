@@ -417,7 +417,7 @@ function renderTeacherProgram(program) {
     <div class="detail-track-resources"><a href="${program.resource.url}" target="_blank" rel="noopener noreferrer">${program.resource.label} <span aria-hidden="true">↗</span></a></div>`;
 }
 
-// 함께 성장하는 교사: QUEST에서 N-ASKIN과 정보교과 4모델로 이어진 연구 과정
+// 함께 성장하는 교사: QUEST에서 N-ASKIN과 범교과 4모델로 이어진 연구 과정
 function renderTeacherResearchStage(activity, stage, index) {
   const research = activity.teacherResearch;
   const image = activity.images?.[stage.imageIndex];
