@@ -1,15 +1,19 @@
-SUCCESS: 18 card renders, 9 multitab sets, full text and resource checks
-SUCCESS: teacher photo galleries — training 6, study group 4, information sharing 4
-SUCCESS: embedded teaching-plan PDFs — open class 13 pages, all-subject training result 29 pages
-SUCCESS: 18 activities across 4 collections — school 6, student 4, class 5, teacher 3
-SUCCESS: 114 local data references and 24 resource URLs checked — 0 missing or invalid
-SUCCESS: public-class overview exposes Canva and PDF; teacher training exposes all-subject PDF
-SUCCESS: all JavaScript data/app files passed syntax checks; embedded MP4 passed ffprobe
-SUCCESS: local web-server smoke test — index and both PDFs returned HTTP 200 with correct MIME types
-SUCCESS: responsive viewport and mobile breakpoints present; resource buttons use a wrapping single-column grid
+SUCCESS: 21 card renders with full text and resource checks
+SUCCESS: teacher photo galleries — training 6, study group 0, parent training 2, information sharing 4
+SUCCESS: embedded PDFs — open class 13 pages, all-subject training result 29 pages, parent training 5 pages, leadership sharing plan 4 pages
+SUCCESS: 21 activities across 4 collections — school 7, student 4, class 5, teacher 5
+SUCCESS: 129 local data references and 24 external references checked — 0 missing local assets
+SUCCESS: public-class overview exposes the student-record web app, Canva and 13-page PDF; teacher training exposes all-subject PDF
+SUCCESS: all JavaScript data/app files passed syntax checks; delimiter balance checks passed for JS and CSS
+SUCCESS: local web-server smoke test — coach ZIP and installation PNG returned HTTP 200 with correct MIME types
+SUCCESS: responsive rules collapse coach feature cards, mode cards, and download panel to one column on mobile
 SUCCESS: teacher research timeline — QUEST, QBL/D-QBL, N-ASKIN, four cross-curricular models
 SUCCESS: teacher-study-group exposes 4 research tabs, no photos, no stage links, and one top-level PDF
 SUCCESS: teacher research renderer — all 4 tabs include research question, application record, and turning point
+SUCCESS: AI inquiry support tool exposes 4 tabs and bundles the exact v0.1.2 ZIP plus 1447×2048 installation guide
+SUCCESS: community-sharing exposes parent training and leadership sharing tabs, 2 parent-training photos, and both source PDFs
+SUCCESS: public-class activity exposes 4 field photos and a dedicated guide directing visitors to select group 2 for a student inquiry record example
+SUCCESS: question-school-showcase exposes 6 event stages and 7 optimized images covering exhibition, reception, overview board, and leaflet
 [
   [
     "question-wings",
@@ -38,6 +42,10 @@ SUCCESS: teacher research renderer — all 4 tabs include research question, app
   ],
   [
     "carbon-neutral-deodorizer",
+    []
+  ],
+  [
+    "question-school-showcase",
     []
   ],
   [
@@ -111,7 +119,28 @@ SUCCESS: teacher research renderer — all 4 tabs include research question, app
   ],
   [
     "teacher-study-group",
-    []
+    [
+      "출발과 탐색",
+      "N-ASKIN 정립",
+      "전 교과 확장",
+      "4개 유형"
+    ]
+  ],
+  [
+    "ai-inquiry-support-tool",
+    [
+      "개발 배경",
+      "도구 소개",
+      "학생·교사 활용",
+      "설치 및 배포"
+    ]
+  ],
+  [
+    "community-sharing",
+    [
+      "학부모 연수",
+      "관내 교장단 공유 협의회"
+    ]
   ],
   [
     "regional-sharing",
