@@ -620,7 +620,18 @@ window.archiveActivities.push(...[
             "body": "실행 전 예상, 실제 결과, 질문과 실험 내용, N-ASKIN 탐구 과정을 기록했습니다."
           }
         ],
+        "webApp": {
+          "title": "학생 탐구 기록 예시 확인",
+          "guide": "공개수업 웹앱을 연 뒤 조 선택 화면에서 ‘2조’를 선택하면, 수업 당시 학생들이 작성한 질문과 실험 결과, 오류 원인 판단, 수정 및 재검증 과정을 예시로 확인할 수 있습니다.",
+          "note": "공개된 기록은 수업 결과 열람용 예시입니다. 기존 학생 기록을 수정하거나 초기화하지 말아 주세요.",
+          "label": "웹앱에서 2조 학생 탐구 기록 보기",
+          "url": "https://script.google.com/macros/s/AKfycbxW9b-lEjXBKdakLD3BdwUElGRw2L2sb1g_o8h4S_6KiNOVS_Vr51cJzUY8XspxUXk/exec"
+        },
         "resources": [
+          {
+            "label": "공개수업 웹앱 — 2조 학생 탐구 기록 예시 보기",
+            "url": "https://script.google.com/macros/s/AKfycbxW9b-lEjXBKdakLD3BdwUElGRw2L2sb1g_o8h4S_6KiNOVS_Vr51cJzUY8XspxUXk/exec"
+          },
           {
             "label": "정보과 공개수업 수업 자료 — Canva",
             "url": "https://canva.link/jsptq4swe7g95z9"
@@ -702,8 +713,33 @@ window.archiveActivities.push(...[
     ],
     "outcomeLabel": "공개수업의 의미 및 결과",
     "outcome": "공개수업은 오류를 빠르게 고치는 활동보다 ‘어떤 조건에서 무엇이 달라졌는가’를 먼저 기록하고, 질문과 실험 근거로 원인을 설명한 뒤 최소 수정과 재검증으로 판단을 확인하는 과정에 초점을 두었습니다. 학생들은 두 대의 태블릿과 조별 역할을 활용해 실행·기록·토의·수정을 협력적으로 이어 갔고, 프로그래밍의 디버깅 과정을 질문탐구 수업의 구조로 가시화했습니다.",
-    "images": [],
+    "images": [
+      {
+        "src": "assets/images/lesson/open-class-01.webp",
+        "alt": "정보과 공개수업에서 학습 목표와 탐구 흐름을 안내하는 모습",
+        "caption": "수업 도입 · 앱 실험, 데이터 분석, 오류 원인 설명과 재검증으로 이어지는 학습 목표 안내"
+      },
+      {
+        "src": "assets/images/lesson/open-class-02.webp",
+        "alt": "학생들이 태블릿으로 공개수업 웹앱을 활용하고 참관 교사들이 수업을 살펴보는 모습",
+        "caption": "오류 재현과 기록 · 2인 1조가 두 대의 태블릿으로 실행과 탐구 기록을 나누어 수행"
+      },
+      {
+        "src": "assets/images/lesson/open-class-03.webp",
+        "alt": "학생들이 공개수업에서 조건별 실행 결과와 조별 기록을 공유하는 모습",
+        "caption": "근거 공유 · 조별 질문과 실행 결과를 공유 화면에서 비교하며 오류 조건과 근거 확인"
+      },
+      {
+        "src": "assets/images/lesson/open-class-04.webp",
+        "alt": "학생들이 짝과 함께 태블릿과 활동지를 활용해 오류 원인을 탐구하는 모습",
+        "caption": "협력 탐구 · 질문과 실험 근거를 연결해 오류 원인을 판단하고 수정·재검증"
+      }
+    ],
     "resources": [
+      {
+        "label": "공개수업 웹앱 — 2조 학생 탐구 기록 예시 보기",
+        "url": "https://script.google.com/macros/s/AKfycbxW9b-lEjXBKdakLD3BdwUElGRw2L2sb1g_o8h4S_6KiNOVS_Vr51cJzUY8XspxUXk/exec"
+      },
       {
         "label": "정보과 공개수업 수업 자료 — Canva",
         "url": "https://canva.link/jsptq4swe7g95z9"

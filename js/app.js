@@ -484,6 +484,7 @@ function renderAIInquiryToolTab(activity, tab) {
 // 2026. 11. 12. 정보과 공개수업: 개요·미션·디버깅형 N-ASKIN
 function renderOpenClassOverview(activity) {
   const overview = activity.openClassDetails.overview;
+  const webApp = overview.webApp;
   return `<div class="detail-track-head open-class-head">
       <span>OPEN CLASS · 2026. 11. 12.</span>
       <h4>협력적 앱 개발 × 디버깅형 N-ASKIN</h4>
@@ -494,6 +495,10 @@ function renderOpenClassOverview(activity) {
     <ol class="detail-simple-steps open-class-goals">${overview.goals.map((goal) => `<li>${goal}</li>`).join("")}</ol>
     <h5 class="detail-subheading">2인 1조 · 태블릿 2대 역할</h5>
     <div class="activity-highlight-grid open-class-role-grid">${overview.roles.map((role) => `<article><b>${role.title}</b><p>${role.body}</p></article>`).join("")}</div>
+    ${webApp ? `<aside class="open-class-webapp-guide">
+      <div><span>STUDENT RECORD EXAMPLE</span><h5>${webApp.title}</h5><p>${webApp.guide}</p><small>${webApp.note}</small></div>
+      <a href="${webApp.url}" target="_blank" rel="noopener noreferrer">${webApp.label} <span aria-hidden="true">↗</span></a>
+    </aside>` : ""}
     <div class="detail-track-resources">${overview.resources.map((resource) => `<a href="${resource.url}" target="_blank" rel="noopener noreferrer">${resource.label} <span aria-hidden="true">↗</span></a>`).join("")}</div>`;
 }
 function renderOpenClassMissions(activity) {

@@ -1119,6 +1119,14 @@ footer { color: #78a5c8; background: #06376c; }
 .open-class-question b { color:#674aa7; }
 .open-class-question p { color:#493c78; }
 .open-class-role-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.open-class-webapp-guide { display:flex; align-items:center; justify-content:space-between; gap:22px; margin-top:20px; padding:20px; border:1px solid #c9d9f3; border-radius:17px; background:linear-gradient(145deg,#eef5ff,#f8fbff); }
+.open-class-webapp-guide div { min-width:0; }
+.open-class-webapp-guide div > span { display:block; margin-bottom:7px; color:#4c71ae; font-size:9px; font-weight:900; letter-spacing:.08em; }
+.open-class-webapp-guide h5 { margin:0 0 8px; color:#3d568e; font:400 19px "Jua",sans-serif; }
+.open-class-webapp-guide p { margin:0; color:#526d8d; font-size:12px; line-height:1.8; }
+.open-class-webapp-guide small { display:block; margin-top:8px; color:#8a6481; font-size:10px; line-height:1.65; }
+.open-class-webapp-guide > a { flex:0 0 245px; display:flex; align-items:center; justify-content:center; gap:8px; min-height:48px; padding:13px 15px; border-radius:12px; color:#fff; background:linear-gradient(135deg,#5849a3,#8063c5); font-size:12px; font-weight:900; text-align:center; box-shadow:0 8px 18px rgba(87,72,160,.2); }
+.open-class-webapp-guide > a:hover,.open-class-webapp-guide > a:focus-visible { background:linear-gradient(135deg,#47398e,#6a50b0); }
 .open-class-mission-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
 .open-class-mission-grid article { position:relative; min-width:0; padding:20px 18px 18px; border:1px solid #e1dbf1; border-radius:16px; background:linear-gradient(145deg,#fbf9ff,#fff); }
 .open-class-mission-grid article > span { display:grid; place-items:center; width:34px; height:34px; margin-bottom:12px; border-radius:11px; background:linear-gradient(135deg,#6855ac,#9a69c7); color:#fff; font-size:11px; font-weight:900; }
@@ -1134,6 +1142,8 @@ footer { color: #78a5c8; background: #06376c; }
   .coach-tool-download { align-items:stretch; flex-direction:column; }
   .coach-tool-download > a { min-width:0; }
   .open-class-role-grid,.open-class-mission-grid { grid-template-columns:1fr; }
+  .open-class-webapp-guide { align-items:stretch; flex-direction:column; }
+  .open-class-webapp-guide > a { flex-basis:auto; }
 }
 @media(max-width:420px) {
   .research-evolution-grid { grid-template-columns:1fr; }
