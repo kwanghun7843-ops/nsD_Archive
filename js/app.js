@@ -445,6 +445,42 @@ function renderTeacherResearchStage(activity, stage, index) {
     ${stage.resources?.length ? `<div class="detail-track-resources">${stage.resources.map((resource) => `<a href="${resource.url}" target="_blank" rel="noopener noreferrer">${resource.label} <span aria-hidden="true">↗</span></a>`).join("")}</div>` : ""}`;
 }
 
+// 함께 성장하는 교사: 범교과 질문탐구 코치의 개발·활용·설치 기록
+function renderAIInquiryToolTab(activity, tab) {
+  const base = `<div class="detail-track-head coach-tool-head">
+      <span>${tab.eyebrow}</span>
+      <div class="coach-tool-title-row"><h4>${tab.title}</h4><b>${activity.aiInquiryTool.version}</b></div>
+      <p>${tab.summary}</p>
+    </div>`;
+
+  if (tab.items) return `${base}
+    <h5 class="detail-subheading">설계 원칙</h5>
+    <ol class="detail-simple-steps coach-tool-steps">${tab.items.map((item) => `<li>${item}</li>`).join("")}</ol>
+    <blockquote class="coach-tool-principle"><b>가장 중요한 원칙</b><p>${tab.principle}</p></blockquote>`;
+
+  if (tab.features) return `${base}
+    <h5 class="detail-subheading">네 가지 탐구 유형</h5>
+    <div class="coach-tool-feature-grid">${tab.features.map((feature) => `<article><b>${feature.title}</b><p>${feature.body}</p></article>`).join("")}</div>`;
+
+  if (tab.modes) return `${base}
+    <div class="coach-tool-mode-grid">${tab.modes.map((mode) => `<article>
+      <span>${mode.tag}</span><h5>${mode.title}</h5>
+      <ol>${mode.items.map((item) => `<li>${item}</li>`).join("")}</ol>
+    </article>`).join("")}</div>`;
+
+  return `${base}
+    <h5 class="detail-subheading">설치 4단계</h5>
+    <ol class="detail-simple-steps coach-tool-steps">${tab.steps.map((step) => `<li>${step}</li>`).join("")}</ol>
+    <div class="coach-tool-download">
+      <div><span>배포 파일</span><b>${tab.download.fileName}</b><p>압축을 풀지 않고 그대로 업로드하세요.</p></div>
+      <a href="${tab.download.url}" download="${tab.download.fileName}">${tab.download.label}<span aria-hidden="true">↓</span></a>
+    </div>
+    <figure class="coach-tool-guide">
+      <a href="${tab.guideImage}" target="_blank" rel="noopener" aria-label="질문탐구 코치 설치 안내 이미지 크게 보기"><img src="${tab.guideImage}" alt="질문탐구 코치 플러그인 설치와 학생·교사 활용 방법 안내" loading="lazy" /></a>
+      <figcaption>설치 안내를 클릭하면 원본 크기로 볼 수 있습니다.</figcaption>
+    </figure>`;
+}
+
 // 2026. 11. 12. 정보과 공개수업: 개요·미션·디버깅형 N-ASKIN
 function renderOpenClassOverview(activity) {
   const overview = activity.openClassDetails.overview;
@@ -504,6 +540,7 @@ function getActivityDetailTabs(activity) {
   ];
   if (activity.makerLessons?.tracks?.length) return activity.makerLessons.tracks.map((t) => ({ id:t.id, label:t.label, render:() => renderMakerTrack(t) }));
   if (activity.teacherResearch?.stages?.length) return activity.teacherResearch.stages.map((stage, index) => ({ id:stage.id, label:stage.label, render:() => renderTeacherResearchStage(activity, stage, index) }));
+  if (activity.aiInquiryTool?.tabs?.length) return activity.aiInquiryTool.tabs.map((tab) => ({ id:tab.id, label:tab.label, render:() => renderAIInquiryToolTab(activity, tab) }));
   if (activity.teacherPrograms?.length) return activity.teacherPrograms.map((program) => ({ id:program.id, label:program.label, render:() => renderTeacherProgram(program) }));
   if (activity.openClassDetails) return [
     { id:"open-overview", label:"수업 개요", render:() => renderOpenClassOverview(activity) },
@@ -534,7 +571,7 @@ function openActivity(activityId) {
   const genericHighlights = (multi && activity.id === "na-moment") ? "" : renderActivityHighlight(activity);
   const singleImages = !multi && activity.images?.length ? `<section class="dialog-section detail-images-section"><h3>사진과 결과물</h3>${renderActivityImages(activity.images,activity.title)}</section>` : "";
   const topResources = activity.id === "teacher-study-group" ? renderActivityResources(activity.resources, "교사 공동 연구 결과") : "";
-  const bottomResources = multi && ["quest-trip","na-moment","humanities-inquiry","maker-inquiry","teacher-study-group","regional-sharing","open-class"].includes(activity.id) ? "" : renderActivityResources(activity.resources);
+  const bottomResources = multi && ["quest-trip","na-moment","humanities-inquiry","maker-inquiry","teacher-study-group","ai-inquiry-support-tool","regional-sharing","open-class"].includes(activity.id) ? "" : renderActivityResources(activity.resources);
   dialog.className = `activity-dialog ${category?.color || "blue"}`;
   dialogContent.innerHTML = `
     <header class="dialog-header">

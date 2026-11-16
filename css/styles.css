@@ -1080,6 +1080,38 @@ footer { color: #78a5c8; background: #06376c; }
 .research-turning-point b { display:block; margin-bottom:6px; color:#367448; font-size:12px; }
 .research-turning-point p { margin:0; color:#536e5b; font-size:12px; line-height:1.8; }
 
+.coach-tool-head { background:linear-gradient(145deg,#edf5ff,#fff); border-color:#cfe0f5; }
+.coach-tool-head > span { color:#2f6dbe; }
+.coach-tool-title-row { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+.coach-tool-title-row h4 { color:#244f8f; }
+.coach-tool-title-row > b { flex:0 0 auto; padding:7px 11px; border-radius:999px; color:#245fa9; background:#dcecff; font-size:10px; }
+.coach-tool-steps li::marker { color:#2d6ec5; font-weight:900; }
+.coach-tool-principle { margin:20px 0 0; padding:19px 20px; border:0; border-radius:16px; color:#fff; background:linear-gradient(135deg,#173f79,#2f6fd1); }
+.coach-tool-principle b { display:block; margin-bottom:6px; color:#cde4ff; font-size:11px; }
+.coach-tool-principle p { margin:0; font:400 18px/1.6 "Jua",sans-serif; }
+.coach-tool-feature-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.coach-tool-feature-grid article { padding:18px; border:1px solid #d6e5f7; border-radius:15px; background:#f6faff; }
+.coach-tool-feature-grid b { display:block; margin-bottom:8px; color:#255a9c; font-size:14px; }
+.coach-tool-feature-grid p { margin:0; color:#5a718a; font-size:12px; line-height:1.75; }
+.coach-tool-mode-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.coach-tool-mode-grid article { padding:21px 20px; border:1px solid #d6e5f7; border-radius:17px; background:#f7fbff; }
+.coach-tool-mode-grid article:nth-child(2) { border-color:#efd99e; background:#fffaf0; }
+.coach-tool-mode-grid span { display:inline-block; padding:5px 9px; border-radius:999px; color:#2862a8; background:#e2efff; font-size:9px; font-weight:900; }
+.coach-tool-mode-grid article:nth-child(2) span { color:#98680e; background:#fff0bf; }
+.coach-tool-mode-grid h5 { margin:12px 0 10px; color:#244f88; font:400 20px "Jua",sans-serif; }
+.coach-tool-mode-grid article:nth-child(2) h5 { color:#815b16; }
+.coach-tool-mode-grid ol { margin:0; padding-left:20px; color:#587087; font-size:12px; line-height:1.85; }
+.coach-tool-download { display:flex; align-items:center; justify-content:space-between; gap:18px; margin:22px 0; padding:19px 20px; border:1px solid #bdd8f7; border-radius:17px; background:#f2f8ff; }
+.coach-tool-download div > span { display:block; margin-bottom:5px; color:#3b6fa8; font-size:9px; font-weight:900; letter-spacing:.1em; }
+.coach-tool-download div > b { display:block; color:#244f86; font-size:13px; overflow-wrap:anywhere; }
+.coach-tool-download p { margin:5px 0 0; color:#66809b; font-size:11px; }
+.coach-tool-download > a { display:flex; align-items:center; justify-content:center; gap:9px; min-width:210px; padding:14px 17px; border-radius:12px; color:#fff; background:linear-gradient(135deg,#1f5cad,#3179dd); font-size:12px; font-weight:900; text-align:center; box-shadow:0 8px 18px rgba(37,96,176,.18); }
+.coach-tool-download > a:hover,.coach-tool-download > a:focus-visible { background:linear-gradient(135deg,#174a91,#2367c5); }
+.coach-tool-guide { margin:24px 0 0; }
+.coach-tool-guide a { display:block; padding:9px; border:1px solid #d7e4f2; border-radius:16px; background:#eef5fc; cursor:zoom-in; }
+.coach-tool-guide img { display:block; width:100%; height:auto; border-radius:10px; }
+.coach-tool-guide figcaption { padding:9px 4px 0; color:#647b92; font-size:11px; text-align:center; }
+
 .open-class-head { background:linear-gradient(145deg,#f6f3ff,#fff); border-color:#ddd5f2; }
 .open-class-head > span { color:#7656b5; }
 .open-class-head h4 { color:#55428d; }
@@ -1098,8 +1130,12 @@ footer { color: #78a5c8; background: #06376c; }
 @media(max-width:620px) {
   .teacher-program-meta { align-items:flex-start; flex-direction:column; gap:4px; }
   .research-evolution-grid { grid-template-columns:1fr 1fr; }
+  .coach-tool-feature-grid,.coach-tool-mode-grid { grid-template-columns:1fr; }
+  .coach-tool-download { align-items:stretch; flex-direction:column; }
+  .coach-tool-download > a { min-width:0; }
   .open-class-role-grid,.open-class-mission-grid { grid-template-columns:1fr; }
 }
 @media(max-width:420px) {
   .research-evolution-grid { grid-template-columns:1fr; }
+  .coach-tool-title-row { flex-direction:column; gap:4px; }
 }
