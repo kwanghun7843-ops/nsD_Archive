@@ -409,6 +409,11 @@ window.archiveActivities.push(...[
         "caption": "성과공유회 리플릿 안쪽면 · 질문하는 학생·수업·교사의 주요 실천 내용 소개"
       }
     ],
-    "resources": []
+    "resources": [
+      {
+        "label": "3D 전시장 둘러보기",
+        "url": "3d-expo/index.html"
+      }
+    ]
   }
 ]);
