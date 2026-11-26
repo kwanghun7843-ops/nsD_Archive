@@ -242,7 +242,6 @@ function renderHumanitiesTrack(track) {
     <div class="humanities-flow-grid">${track.steps.map((step,index)=>`
       <article class="humanities-flow-step"><span>${String(index+1).padStart(2,"0")}</span><b>${step.code}</b><div><h6>${step.name}</h6><p>${step.detail}</p></div></article>
     `).join("")}</div>
-    <div class="humanities-meaning"><b>활동의 의미</b><p>${track.meaning}</p></div>
     ${track.photos?.length ? `
       <h5 class="humanities-subheading">${track.galleryTitle}</h5>
       <div class="humanities-gallery">${track.photos.map((photo)=>`<figure>
@@ -564,6 +563,10 @@ function renderDetailTabGroup(activity, detailTabs) {
     <div class="detail-panel" id="detail-panel-${activity.id}" role="tabpanel" aria-labelledby="detail-tab-${activity.id}-0" aria-live="polite">${detailTabs[0].render()}</div>
   </section>`;
 }
+function renderActivityOutcomeContent(activity, tabId) {
+  const outcome = activity.outcomesByTab?.[tabId] || activity.outcome;
+  return `<span>${activity.outcomeLabel || "활동의 의미 및 변화"}</span><p>${outcome}</p>`;
+}
 function openActivity(activityId) {
   const activity = activities.find((item) => item.id === activityId);
   if (!activity) return;
@@ -594,9 +597,8 @@ function openActivity(activityId) {
     ${multi ? renderDetailTabGroup(activity,detailTabs) : `${commonProcess}${renderStandardExtras(activity)}`}
     ${genericHighlights}
     ${singleImages}
-    <section class="outcome-box detail-common-outcome">
-      <span>${activity.outcomeLabel || "활동의 의미 및 변화"}</span>
-      <p>${activity.outcome}</p>
+    <section class="outcome-box detail-common-outcome" aria-live="polite">
+      ${renderActivityOutcomeContent(activity, detailTabs[0]?.id)}
     </section>
     ${bottomResources}
   `;
@@ -701,6 +703,8 @@ document.addEventListener("click", (event) => {
       const panel = section.querySelector(".detail-panel");
       panel.innerHTML = selected.render();
       panel.setAttribute("aria-labelledby", commonTab.id);
+      const outcomeBox = dialogContent.querySelector(".detail-common-outcome");
+      if (outcomeBox) outcomeBox.innerHTML = renderActivityOutcomeContent(activity, selected.id);
     }
     return;
   }
